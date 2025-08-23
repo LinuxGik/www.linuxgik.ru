@@ -2,6 +2,14 @@
 
 /* типы файлов в абзацах */
 
+.text-code-box {
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    padding: .2em 1em;
+    overflow: auto;
+}
+
 .text-dir {
     color: #268BD2;
 }

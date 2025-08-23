@@ -17,18 +17,18 @@ h1: Справочный портал в мире информационных �
     </p>
     <h3>Завершающий слеш "/"</h3>
     <p>
-        Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог
-        /dest_dir :
-    </p>
-    <code class="code-box">
-						<span style="color: #3bd11c;font-weight: bold;">
+        Источник<span class="attention"> без завершающего слеша скопирует сам каталог</span> /path/dir в удаленный
+        каталог /dest_dir :<br>
+        <code class="text-code-box"><span style="color: #3bd11c;font-weight: bold;">
 							local
 						</span>]
-        <span style="color:royalblue;">
+            <span style="color:royalblue;">
 							$
 						</span>
-        rsync -a /path/dir user@host:dest_dir
-    </code>
+            rsync -a /path/dir user@host:dest_dir
+        </code>
+    </p>
+
     <p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span>
         /path/dir, а все содержимое
         в удаленный каталог dest_dir</span> :
