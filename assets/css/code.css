@@ -1,0 +1,28 @@
+pre {
+    width: 80%;
+    max-width: 800px;
+    background: #272822;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: Roboto;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+code {
+    font-family: inherit;
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.dir { color: #268BD2 } /* Директория в коде */
+.html { color: #E34F26; }
+.yml { color: oklch(0.391 0.076 86.76); }     /* YAML-файл */
+
+.code > .dir {
+    font-weight: bold;
+}

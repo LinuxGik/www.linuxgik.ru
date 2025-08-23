@@ -1,0 +1,58 @@
+---
+layout: default
+title: Главная
+h1: Справочный портал в мире информационных технологий
+---
+
+<article class="article-box"> <!--rsync-->
+    <h2>rsync</h2>
+    <p>
+        Должна быть установлена на всех машинах.
+    </p>
+    <p>
+        В <span class="rsync">rsync</span> всегда, сначала указываем <span class="rsync">источник</span>, а потом
+        <span class="rsync">место назначения</span>, т.е сначала что копируем, а потом куда копируем.<br>
+        Всегда используйте<span class="rsync"> параметр -nv перед прогоном</span>. rsync может натворить огромную
+        головную боль если что-то не так сделать.
+    </p>
+    <h3>Завершающий слеш "/"</h3>
+    <p>
+        Источник<span class="sync2"> без завершающего слеша скопирует сам каталог </span> /path/dir в удаленный каталог
+        /dest_dir :
+    </p>
+    <code class="code-box">
+						<span style="color: #3bd11c;font-weight: bold;">
+							local
+						</span>]
+        <span style="color:royalblue;">
+							$
+						</span>
+        rsync -a /path/dir user@host:dest_dir
+    </code>
+    <p>Путь к каталогу источнику <span class="sync2">с косой чертой в конце </span>скопирует <span class="sync2">не сам каталог</span>
+        /path/dir, а все содержимое
+        в удаленный каталог dest_dir</span> :
+    </p>
+    <code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span
+            style="color:royalblue;">$</span> rsync -a path/dir/ user@host:dest_dir
+    </code>
+    <!-- h3 "Завершающий слеш"-->
+    <h3>Небольшая инструкция по синхронизации</h3>
+    <p>1. Сихронизируем локальный каталог с удаленным сервером:
+        <code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span
+                style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" html/ user@host:html/
+        </code>
+        <br>прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.
+    </p>
+    <p>2. На удаленной машине синхронизируем каталоги:
+        <code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span
+                style="color:royalblue;">$</span> rsync -a html/ /var/www/html/
+        </code>
+    </p>
+    <h3>Исключить каталог из операции переноса</h3>
+    <p><code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span
+            style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" --exclude
+        'res/header' html/ user@host:html/
+    </code>
+    </p>
+</article> <!-- закрытие rsync-->

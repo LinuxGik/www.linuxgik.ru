@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik {% if page.title %} - {{ page.title }} {% endif %}</title>
+</head>
+    <body class="grid-container">
+
+        <header>
+            {% include header-nav.html %}
+        </header>
+
+        <main class="main">
+            {{ content }}
+        </main>
+
+
+    <aside class="sidebar-L">
+        {% include sidebar-L/sidebar-L-default.html %}
+    </aside>
+
+    <footer>
+        {% include footer.html %}
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

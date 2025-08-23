@@ -1,0 +1,11 @@
+defaults:
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: "default"
+
+exclude:
+ - forAI/
+ - LICENSE
+ - README.md

@@ -1,0 +1,37 @@
+@import url("fonts/fonts.css");
+@import url("header-nav.css");
+@import url("code.css");
+@import url("typography.css");
+@import url("sidebar-L.css");
+
+/* Теги */
+body {
+    font-family: Inter, sans-serif;
+    background-color: #fafafa;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+header {
+    font-size: 12px;
+}
+/* <main> */
+
+.article-box {
+    padding-left: 3em;
+    padding-bottom: 1em;
+    background-color: #fbf1ec;
+    border-radius: 12px;
+    margin-top: 0;
+}
+
+.article-box > h2 {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+footer {
+    background-color: rgb(36, 18, 4);
+    color: rgb(71, 65, 56);
+}
+

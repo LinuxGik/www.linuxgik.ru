@@ -1,0 +1,13 @@
+<!-- Первый блок навигации -->
+<nav>
+    <ul class="site-nav">
+            <li><a href="/index.html"><span class="linux">Linux</span><span class="gik">Gik</span></a></li>
+        {% for item in site.data.navigation %}
+            <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+<!-- Конец первого блока навигации -->
+<p>Вы находитесь на главной странице портала.</p>
+<h1>{{ page.h1 }}</h1>
+

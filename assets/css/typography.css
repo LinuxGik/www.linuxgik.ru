@@ -1,0 +1,41 @@
+/* Ассоциативные цвета, для выделения в абзацах, html-тегов, путей к файлам, директорий, определенных типов файлов. */
+
+/* типы файлов в абзацах */
+
+.text-dir {
+    color: #268BD2;
+}
+.text-html {
+    color: #E34F26;
+}
+.text-yml {
+    color: oklch(0.575 0.217 24.214);
+}
+
+/* директории, файлы, пути к файлам */
+/* <span class="path"><span class="dir">_layouts</span>/<span class="html">default.html</span></span> */
+/* Путь к файлу, обрамляется в класс .path, директория в .dir, файл обрамляется в свой класс.*/
+.path {
+    font-family: 'Courier New', Courier, monospace;
+    background: #edeaea;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+
+.yml { color: oklch(0.87 0.16 89.42); }     /* YAML-файл */
+
+
+/* Другое */
+
+/* Очень важное понятие */
+.rsync {
+    color: rgb(158, 30, 94);
+    font-weight: bold;
+}
+
+.attention {
+    color: rgb(90, 39, 230);
+    font-weight: bold;
+}
+
