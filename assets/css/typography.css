@@ -1,7 +1,13 @@
 /* Ассоциативные цвета, для выделения в абзацах, html-тегов, путей к файлам, директорий, определенных типов файлов. */
+:root {
+    --color-local-text-code-box: #3bd11c;
+    --color-remote-text-code-box: #ef2929;
+    --color-rsync: rgb(158, 30, 94);
+    --color-attention: rgb(90, 39, 230);
+    --color-dir: #268BD2;
+}
 
-/* типы файлов в абзацах */
-
+/* блок код в абзаце */
 .text-code-box {
     background-color: #333;
     color: white;
@@ -9,9 +15,17 @@
     padding: .2em 1em;
     overflow: auto;
 }
+.local {
+    color: var(--color-local-text-code-box);
+    font-weight: bold;
+}
 
+.text-code-box > .text-dir {
+    font-weight: bold;
+}
+/* типы файлов в абзацах */
 .text-dir {
-    color: #268BD2;
+    color: var(--color-dir);
 }
 .text-html {
     color: #E34F26;
@@ -38,12 +52,12 @@
 
 /* Очень важное понятие */
 .rsync {
-    color: rgb(158, 30, 94);
+    color: var(--color-rsync);
     font-weight: bold;
 }
 
 .attention {
-    color: rgb(90, 39, 230);
+    color: var(--color-attention);
     font-weight: bold;
 }
 
