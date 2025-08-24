@@ -1,0 +1,42 @@
+.sidebar-L {
+    margin-left: 6px;
+}
+
+.sidebar-L > h2 {
+    margin: 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.revert-h3 {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+}
+
+.revert-h3 > img {
+    width: 50px;
+    height: 77px;
+    float: left;
+    margin-right: 8px;
+    /*margin-left: 4px;*/
+}
+
+.revert-h3 > h3 {
+    padding-top: 15px;
+    margin-bottom: 13px;
+}
+
+/* статья в sidebar-L */
+.block-know {
+    margin: 5px 0 10px;
+}
+
+.block-know > p {
+    margin: 1px;
+}
+
+.block-know > p > code {
+    background-color: #d4c3c3;
+    border-radius: 2px;
+    padding: 0 4px;
+    font-size: 0.7em;
+}
