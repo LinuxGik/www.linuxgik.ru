@@ -17,7 +17,7 @@ header {
     font-size: 12px;
 }
 /* <main> */
-
+/* ARTICLE-BOX */
 .article-box {
     padding-left: 3em;
     padding-bottom: 1em;
@@ -30,6 +30,29 @@ header {
     border-bottom: 1px solid #e1e1e1;
 }
 
+.article-box > h3 {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.article-box h3 + p {
+    margin-top: 0.5em;
+}
+
+.instruction-list > li > p:first-child {
+    margin-top: 0.5em;
+}
+
+.note {
+    padding: 2px;
+    display: inline-block;
+    border: #cdec98 solid 1px;
+    margin-top: 0;
+    font-size: 0.9em;
+    background-color: #dee1cf;
+}
+
+/* FOOTER */
 footer {
     background-color: rgb(36, 18, 4);
     color: rgb(71, 65, 56);

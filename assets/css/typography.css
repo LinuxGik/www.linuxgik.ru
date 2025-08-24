@@ -20,7 +20,12 @@
     font-weight: bold;
 }
 
+.remote {
+    color: var(--color-remote-text-code-box);
+    font-weight: bold;
+}
 .text-code-box > .text-dir {
+    color: #3ba0e6;
     font-weight: bold;
 }
 /* типы файлов в абзацах */
@@ -32,6 +37,15 @@
 }
 .text-yml {
     color: oklch(0.575 0.217 24.214);
+}
+
+
+.custom-hr {
+    border: 0;           /* Убираем стандартную рамку */
+    height: 1px;         /* Толщина линии */
+    background-color: #ccc; /* Цвет линии */
+    width: 50%;          /* Ширина линии (можно задать в px, %) */
+    margin: 0 auto 0 10em;    /* Автоматические отступы по бокам выравнивают по центру */
 }
 
 /* директории, файлы, пути к файлам */

@@ -15,43 +15,51 @@ h1: Справочный портал в мире информационных �
         Всегда используйте<span class="rsync"> параметр -nv перед прогоном</span>. rsync может натворить огромную
         головную боль если что-то не так сделать.
     </p>
+    <hr class="custom-hr" />
     <h3>Завершающий слеш "/"</h3>
     <p>
         Источник<span class="attention"> без завершающего слеша скопирует сам каталог</span>
-        /<span class="text-dir">path</span>/<span class="text-dir">dir</span> в удаленный каталог
-        /<span class="text-dir">dest_dir</span>:<br>
+        <span class="text-dir">/path/dir</span> в удаленный каталог
+        <span class="text-dir">/dest_dir</span>:<br>
         <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
-            rsync -a /<span class="text-dir">path</span>/<span class="text-dir">dir</span>
-            user@host:<span class="text-dir">dest_dir</span>
+            rsync -a /path/dir user@host:dest_dir
         </code>
     </p>
 
     <p>Путь к каталогу источнику <span class="attention">с косой чертой в конце </span>скопирует
-        <span class="attention">не сам каталог</span>/<span class="text-dir">path</span>/<span class="text-dir">dir</span>,
-        а все содержимое в удаленный каталог <span class="text-dir">dest_dir</span>:<br>
+        <span class="attention">не сам каталог</span> <span class="text-dir">/path/dir</span>,
+        а все содержимое в удаленный каталог <span class="text-dir">/dest_dir</span>:<br>
         <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
-            rsync -a /<span class="text-dir">path</span>/<span class="text-dir">dir</span>/
-            user@host:<span class="text-dir">dest_dir</span>
+            rsync -a /path/dir/ user@host:dest_dir
         </code>
     </p>
-
-    <!-- h3 "Завершающий слеш"-->
+    <hr class="custom-hr" />
+<!-- h3 "Завершающий слеш"-->
     <h3>Небольшая инструкция по синхронизации</h3>
-    <p>1. Сихронизируем локальный каталог с удаленным сервером:<br>
-        <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
-            rsync -a -e "ssh -p 7967" <span class="text-dir">html</span>/ user@host:<span class="text-dir">html</span>/
-        </code>
-        <br>прим: -e "ssh -p 7967" указывает коннектиться по определенному порту.
-    </p>
-    <p>2. На удаленной машине синхронизируем каталоги:
-        <code class="code-box"><span style="color: #ef2929;font-weight: bold;">remote</span>]<span
-                style="color:royalblue;">$</span> rsync -a html/ /var/www/html/
-        </code>
-    </p>
+    <ol class="instruction-list">
+        <li>
+            <p>Синхронизируем локальный каталог с удаленным сервером:<br>
+                <code class="text-code-box"><span class="local">local</span>]<span style="color: royalblue">$</span>
+                    rsync -a -e "ssh -p 7967" html/ user@host:html/</code>
+            </p>
+            <p class="note">
+                <span>Примечание</span>: <code>-e "ssh -p 7967"</code> указывает коннектиться по определенному порту.
+            </p>
+        </li>
+        <li>
+            <p>
+                На удаленной машине синхронизируем каталоги:<br>
+                <code class="text-code-box"><span class="remote">remote</span>]<span style="color: royalblue">$</span>
+                    rsync -a html/ /var/www/html/
+                </code>
+            </p>
+        </li>
+    </ol>
+    <hr class="custom-hr" />
     <h3>Исключить каталог из операции переноса</h3>
-    <p><code class="code-box"><span style="color: #3bd11c;font-weight: bold;">local</span>]<span
-            style="color:royalblue;">$</span> rsync -a -e "ssh -p 7967" --exclude
-        'res/header' html/ user@host:html/
-    </code>
+    <p>
+        <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
+            rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/
+        </code>
     </p>
 </article> <!-- закрытие rsync-->
