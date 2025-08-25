@@ -1,9 +1,9 @@
 defaults:
   - scope:
       path: "pages"
-      type: "pages"
     values:
       layout: "default"
+      sidebar-path: sidebar-L/sidebar-L-default.html
 
 exclude:
  - forAI/

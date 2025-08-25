@@ -1,7 +1,8 @@
 /* Ассоциативные цвета, для выделения в абзацах, html-тегов, путей к файлам, директорий, определенных типов файлов. */
 :root {
-    --color-local-text-code-box: #3bd11c;
-    --color-remote-text-code-box: #ef2929;
+    --color-local: #3bd11c;
+    --color-remote: #e8ac0b;
+    --color-root:  #ef2929;
     --color-rsync: rgb(158, 30, 94);
     --color-attention: rgb(90, 39, 230);
     --color-dir: #268BD2;
@@ -15,8 +16,9 @@
     padding: .2em 1em;
     overflow: auto;
 }
+
 .local {
-    color: var(--color-local-text-code-box);
+    color: var(--color-local);
     font-weight: bold;
 }
 .local::before {
@@ -24,11 +26,19 @@
 }
 
 .remote {
-    color: var(--color-remote-text-code-box);
+    color: var(--color-remote);
     font-weight: bold;
 }
 .remote::before {
     content: "remote";
+}
+
+.root {
+    color: var(--color-root);
+    font-weight: bold;
+}
+.root::before {
+    content: "root";
 }
 
 .text-code-box > .text-dir {
@@ -82,3 +92,11 @@
     font-weight: bold;
 }
 
+kbd {
+    color: black;
+    font-size: small;
+    border: 0.2em solid; border-color: #DDD #BBB #BBB #DDD;
+    padding: 0 0.4em;
+    background: #EEE;
+    white-space: nowrap;
+}
