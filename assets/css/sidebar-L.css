@@ -1,5 +1,10 @@
 .sidebar-L {
     margin-left: 6px;
+    margin-right: 1em;
+    /*background-color: #f7eadf;*/
+    /*background-color: #fafafa;*/
+    background-color: #fbf1ec;
+
 }
 
 .sidebar-L > h2 {
