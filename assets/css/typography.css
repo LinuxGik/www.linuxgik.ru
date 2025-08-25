@@ -19,11 +19,18 @@
     color: var(--color-local-text-code-box);
     font-weight: bold;
 }
+.local::before {
+    content: "local"
+}
 
 .remote {
     color: var(--color-remote-text-code-box);
     font-weight: bold;
 }
+.remote::before {
+    content: "remote";
+}
+
 .text-code-box > .text-dir {
     color: #3ba0e6;
     font-weight: bold;

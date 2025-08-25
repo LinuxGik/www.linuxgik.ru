@@ -9,7 +9,7 @@ sidebar-L-include: index.html
 ---
 
 <article class="article-box"> <!--rsync-->
-    <h2>rsync</h2>
+    <header class="article-header"><h2>rsync</h2></header>
     <p>
         Должна быть установлена на всех машинах.
     </p>
@@ -25,7 +25,7 @@ sidebar-L-include: index.html
         Источник<span class="attention"> без завершающего слеша скопирует сам каталог</span>
         <span class="text-dir">/path/dir</span> в удаленный каталог
         <span class="text-dir">/dest_dir</span>:<br>
-        <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
+        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a /path/dir user@host:dest_dir
         </code>
     </p>
@@ -33,7 +33,7 @@ sidebar-L-include: index.html
     <p>Путь к каталогу источнику <span class="attention">с косой чертой в конце </span>скопирует
         <span class="attention">не сам каталог</span> <span class="text-dir">/path/dir</span>,
         а все содержимое в удаленный каталог <span class="text-dir">/dest_dir</span>:<br>
-        <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
+        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a /path/dir/ user@host:dest_dir
         </code>
     </p>
@@ -43,7 +43,7 @@ sidebar-L-include: index.html
     <ol class="instruction-list">
         <li>
             <p>Синхронизируем локальный каталог с удаленным сервером:<br>
-                <code class="text-code-box"><span class="local">local</span>]<span style="color: royalblue">$</span>
+                <code class="text-code-box"><span class="local"></span>]<span style="color: royalblue">$</span>
                     rsync -a -e "ssh -p 7967" html/ user@host:html/</code>
             </p>
             <p class="note">
@@ -53,7 +53,7 @@ sidebar-L-include: index.html
         <li>
             <p>
                 На удаленной машине синхронизируем каталоги:<br>
-                <code class="text-code-box"><span class="remote">remote</span>]<span style="color: royalblue">$</span>
+                <code class="text-code-box"><span class="remote"></span>]<span style="color: royalblue">$</span>
                     rsync -a html/ /var/www/html/
                 </code>
             </p>
@@ -62,8 +62,35 @@ sidebar-L-include: index.html
     <hr class="custom-hr" />
     <h3>Исключить каталог из операции переноса</h3>
     <p>
-        <code class="text-code-box"><span class="local">local</span>]<span style="color:royalblue;">$</span>
+        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/
         </code>
     </p>
 </article> <!-- закрытие rsync-->
+
+<article class="article-box">
+    <header class="article-header"><h2>Команда scp</h2></header>
+    <p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде <i>cp</i></p>
+
+    <p>Примеры:</p>
+    <ul>
+        <li>
+            <p>
+                <b>Файл</b> с удаленного хоста к себе в текущую директорию -
+                <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue">$</span>
+                    scp user@host:path_file path_copy_past
+                </code>
+            </p>
+        </li>
+        <li>
+            <p>
+                <b>Каталог</b> с удаленного хоста через <b>другой порт</b> -
+                <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue">$</span>
+                    scp -r -P 2871 user@host:path_file path_copy_past
+                </code>
+            </p>
+        </li>
+    </ul>
+    <p class="note-attention">Внимание: для scp порт указывается с большой "P".</p>
+
+</article> <!--закрытие "Команда scp"-->

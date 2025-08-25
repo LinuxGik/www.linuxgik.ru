@@ -13,7 +13,7 @@ body {
     color: #333;
     margin: 0;
 }
-header {
+.site-header {
     font-size: 12px;
 }
 /* <main> */
@@ -26,7 +26,7 @@ header {
     margin-top: 0;
 }
 
-.article-box > h2 {
+.article-header {
     border-bottom: 1px solid #e1e1e1;
 }
 
@@ -39,6 +39,9 @@ header {
     margin-top: 0.5em;
 }
 
+.article-box > ul {
+    list-style-type: none;
+}
 .instruction-list > li > p:first-child {
     margin-top: 0.5em;
 }
@@ -50,6 +53,15 @@ header {
     margin-top: 0;
     font-size: 0.9em;
     background-color: #dee1cf;
+}
+
+.note-attention {
+    padding: 2px;
+    display: inline-block;
+    border: #ec98be solid 1px;
+    margin-top: 0;
+    font-size: 0.9em;
+    background-color: #e1cfd8;
 }
 
 /* FOOTER */
