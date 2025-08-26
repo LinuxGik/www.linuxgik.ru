@@ -1,10 +1,12 @@
 /* Ассоциативные цвета, для выделения в абзацах, html-тегов, путей к файлам, директорий, определенных типов файлов. */
 :root {
-    --color-local: #3bd11c;
-    --color-remote: #e8ac0b;
+    --color-local: #458535;
+    --color-remote: #7a6733;
     --color-root:  #ef2929;
-    --color-rsync: rgb(158, 30, 94);
-    --color-attention: rgb(90, 39, 230);
+    /*--color-rsync: rgb(158, 30, 94);*/
+    --color-rsync: rgb(152, 105, 128);
+    /*--color-attention: rgb(90, 39, 230);*/
+    --color-attention: rgb(126, 114, 152);
     --color-dir: #268BD2;
 }
 
@@ -70,12 +72,14 @@
 /* Путь к файлу, обрамляется в класс .path, директория в .dir, файл обрамляется в свой класс.*/
 .path {
     font-family: 'Courier New', Courier, monospace;
-    background: #edeaea;
+    background-color: #edeaea;
     padding: 0.1em 0.3em;
     border-radius: 3px;
     font-size: 0.95em;
 }
-
+.note > .path {
+    background-color: #edf1dd;
+}
 .yml { color: oklch(0.87 0.16 89.42); }     /* YAML-файл */
 
 
@@ -92,11 +96,11 @@
     font-weight: bold;
 }
 
-kbd {
-    color: black;
-    font-size: small;
-    border: 0.2em solid; border-color: #DDD #BBB #BBB #DDD;
-    padding: 0 0.4em;
-    background: #EEE;
-    white-space: nowrap;
-}
+/*kbd {*/
+/*    color: black;*/
+/*    font-size: small;*/
+/*    border: 0.2em solid; border-color: #DDD #BBB #BBB #DDD;*/
+/*    padding: 0 0.4em;*/
+/*    background: #EEE;*/
+/*    white-space: nowrap;*/
+/*}*/

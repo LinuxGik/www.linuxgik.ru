@@ -49,6 +49,7 @@ body {
 }
 .instruction-list > li > p:first-child {
     margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .note {
@@ -56,17 +57,18 @@ body {
     display: inline-block;
     border: #cdec98 solid 1px;
     margin-top: 0;
-    font-size: 0.9em;
-    background-color: #dee1cf;
+    font-size: 0.7em;
+    /*background-color: #dee1cf;*/
+    background-color: #f1f4e8;
 }
 
 .note-attention {
     padding: 2px;
     display: inline-block;
-    border: #ec98be solid 1px;
+    border: #efb6cf solid 1px;
     margin-top: 0;
-    font-size: 0.9em;
-    background-color: #e1cfd8;
+    font-size: 0.7em;
+    background-color: #f1e7ec;
 }
 
 /* FOOTER */

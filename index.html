@@ -20,17 +20,17 @@ sidebar-path: sidebar-L/sidebar-L-default.html
     <h3>Завершающий слеш "/"</h3>
     <p>
         Источник<span class="attention"> без завершающего слеша скопирует сам каталог</span>
-        <span class="text-dir">/path/dir</span> в удаленный каталог
-        <span class="text-dir">/dest_dir</span>:<br>
-        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
+        <span class="path">/path/dir</span> в удаленный каталог
+        <span class="path">/dest_dir</span>:<br>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a /path/dir user@host:dest_dir
         </code>
     </p>
 
     <p>Путь к каталогу источнику <span class="attention">с косой чертой в конце </span>скопирует
-        <span class="attention">не сам каталог</span> <span class="text-dir">/path/dir</span>,
-        а все содержимое в удаленный каталог <span class="text-dir">/dest_dir</span>:<br>
-        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
+        <span class="attention">не сам каталог</span> <span class="path">/path/dir</span>,
+        а все содержимое в удаленный каталог <span class="path">/dest_dir</span>:<br>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a /path/dir/ user@host:dest_dir
         </code>
     </p>
@@ -40,17 +40,17 @@ sidebar-path: sidebar-L/sidebar-L-default.html
     <ol class="instruction-list">
         <li>
             <p>Синхронизируем локальный каталог с удаленным сервером:<br>
-                <code class="text-code-box"><span class="local"></span>]<span style="color: royalblue">$</span>
+                <code class="path"><span class="local"></span>]<span style="color: royalblue">$</span>
                     rsync -a -e "ssh -p 7967" html/ user@host:html/</code>
             </p>
             <p class="note">
-                <span>Примечание</span>: <code>-e "ssh -p 7967"</code> указывает коннектиться по определенному порту.
+                <span>Примечание</span>: <code class="path">-e "ssh -p 7967"</code> указывает коннектиться по определенному порту.
             </p>
         </li>
         <li>
             <p>
                 На удаленной машине синхронизируем каталоги:<br>
-                <code class="text-code-box"><span class="remote"></span>]<span style="color: royalblue">$</span>
+                <code class="path"><span class="remote"></span>]<span style="color: royalblue">$</span>
                     rsync -a html/ /var/www/html/
                 </code>
             </p>
@@ -59,7 +59,7 @@ sidebar-path: sidebar-L/sidebar-L-default.html
     <hr class="custom-hr" />
     <h3>Исключить каталог из операции переноса</h3>
     <p>
-        <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue;">$</span>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
             rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/
         </code>
     </p>
@@ -74,7 +74,7 @@ sidebar-path: sidebar-L/sidebar-L-default.html
         <li>
             <p>
                 <b>Файл</b> с удаленного хоста к себе в текущую директорию -
-                <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue">$</span>
+                <code class="path"><span class="local"></span>]<span style="color:royalblue">$</span>
                     scp user@host:path_file path_copy_past
                 </code>
             </p>
@@ -82,7 +82,7 @@ sidebar-path: sidebar-L/sidebar-L-default.html
         <li>
             <p>
                 <b>Каталог</b> с удаленного хоста через <b>другой порт</b> -
-                <code class="text-code-box"><span class="local"></span>]<span style="color:royalblue">$</span>
+                <code class="path"><span class="local"></span>]<span style="color:royalblue">$</span>
                     scp -r -P 2871 user@host:path_file path_copy_past
                 </code>
             </p>
