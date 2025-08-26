@@ -100,26 +100,20 @@ sidebar-path: sidebar-L/sidebar-L-default.html
     <h3>1. Создаем пользователя с правами sudo</h3>
         <ul>
             <li>
-                <p>
-                    <code class="path">
-                        <span class="root"></span>]<span style="color: royalblue">#</span> useradd <i>new_username</i>
-                    </code> - добавляем пользователя.
-                </p>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> useradd <i>new_username</i>
+                </code> - добавляем пользователя.
             </li>
             <li>
-                <p>
-                    <code class="path">
-                        <span class="root"></span>]<span style="color: royalblue">#</span> passwd <i>new_username</i>
-                    </code> - задаем ему пароль.
-                </p>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> passwd <i>new_username</i>
+                </code> - задаем ему пароль.
             </li>
             <li>
-                <p>
-                    <code class="path">
-                        <span class="root"></span>]<span style="color: royalblue">#</span> usermod -aG
-                        <i>group_name1 group_name2... user_name</i>
-                    </code> - добавляем пользователя в группу <b>wheel</b>.
-                </p>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> usermod -aG
+                    <i>group_name1 group_name2... user_name</i>
+                </code> - добавляем пользователя в группу <b>wheel</b>.
             </li>
         </ul>
         <p>Выходим из сессии root и заходим под новым пользователем.</p>
@@ -131,11 +125,10 @@ sidebar-path: sidebar-L/sidebar-L-default.html
             ключей-ssh в системе Windows</a>
         </p>
         <ul>
-            <li><p><code class="path"><span class="user">]</span> ssh-keygen</code> - на клиенте генерируем пару ключей.</p></li>
+            <li><code class="path"><span class="user">]</span> ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
             <li>
-                <p>
-                    <code class="path"><span class="user">]</span> ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.
-                </p>
+                <code class="path"><span class="user">]</span> ssh-copy-id user@host</code>
+                - копируем открытый ключ на удаленный сервер.
             </li>
             <li>
                 <figure>
@@ -148,63 +141,69 @@ sidebar-path: sidebar-L/sidebar-L-default.html
                     </ul>
                 </figure>
             <li>
-                Далее нужно проверить, включен ли SeLinux:
-                <code>$ sestatus</code>
-                если да, то обновляем политику SeLinux чтобы разрешить использование этого порта:
-                <ul>
-                    <li><code>~]# yum install policycoreutils-python-utils</code></li>
-                    <li><code>~]# semanage port -a -t ssh_port_t -p tcp #номер</code></li>
-                </ul>
-                если SeLinux отключен, тогда просто открываем порт.
+            <li>
+                <figure>
+                    <figcaption>Далее нужно обновить политику SeLinux, чтобы разрешить использование этого порта</figcaption>
+                    <ul>
+                        <li>Проверить включен ли SeLinux <code class="path"><span class="user">]</span>sestatus</code>.</li>
+                        <li><code class="path"><span class="root">]</span> yum install policycoreutils-python-utils</code></li>
+                        <li><code class="path"><span class="root">]</span> semanage port -a -t ssh_port_t -p tcp #номер</code></li>
+                    </ul>
+                </figure>
             </li>
             <li>
-                Открываем порт в firewall
+                <figure>
+                    <figcaption>Открываем порт в firewall</figcaption>
                 <ul>
-                    <li># firewall-cmd --add-port #номер/tcp</li>
-                    <li># firewall-cmd --runtime-to-permanent</li>
+                    <li><code class="path"><span class="root">]</span> firewall-cmd --add-port #номер/tcp</code></li>
+                    <li><code class="path"><span class="root">]</span> firewall-cmd --runtime-to-permanent</code></li>
+                    <li><code class="path"><span class="root">]</span> semanage port -l | grep ssh</code></li>
                 </ul>
+                </figure>
             </li>
         </ul>
-        <p>Начальная настройка завершена.</p>
+        <p>Начальная настройка SSH завершена.</p>
+    <hr class="custom-hr" />
+        <!-- Закрытие h3 Настройка SSH -->
+        <h3>3. Установка и запуск web-сервера</h3><!--Установка web-сервера -->
+            <ul>
+                <li> <a href="https://httpd.apache.org/">Перейти на официальный сайт apache.org</a></li>
+                <li> <a href="https://nginx.org/ru/">Перейти на официальный сайт nginx.org</a></li>
+            </ul>
+            <figure>
+                <figcaption>Для запуска веб-сервера нужно:</figcaption>
+                <ol>
+                    <li>Установить веб-сервер
+                    <li>Открыть порт в межсетевом экране
+                    <li>Настроить автоматический запуск для службы <i>httpd</i> или <i>nginx</i>
+                </ol>
+            </figure>
+            <figure><figcaption>Установка веб-сервера</figcaption>
+                    <ul><li><figure><figcaption>Apache</figcaption><ul>
+                                <li><code class="path"><span class="root">]</span> yum install <i>httpd</i></code></li>
+                                <li><code class="path"><span class="root">]</span> systemctl enable httpd --now</code></li>
+                        </ul></figure></li>
+                        <li><figure><figcaption>Nginx</figcaption><ul>
+                            <li><code class="path"><span class="root">]</span> yum install <i>nginx</i></code></li>
+                            <li><code class="path"><span class="root">]</span> systemctl enable nginx --now</code></li>
+                        </ul></figure></li>
+                    </ul></figure>
+            <figure><figcaption>Открываем порт в межсетевом экране</figcaption><ul>
+                <li>
+                    <code class="path">
+                        <span class="root">]</span>firewall-cmd --zone=public --add-service=http --permanent
+                    </code> - добавляем в активную конфигурацию 80-ый порт в виде сервиса http.
+                    <p class="note">
+                        Порт 80 ассоциирован с сервисом http в firewalld. Подробней читай в официальной документации firewalld:
+                        <a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a>
+                    </p>
+                </li>
+                <li><code class="path"><span class="root">]</span> firewall-cmd --reload</code></li>
+                <li><code class="path"><span class="root">]</span>firewall-cmd --list-all</code> - проверяем что порт открыт.</li>
+            </ul></figure>
 
-    <!-- Потомок grida -->
-    <div class="instr3">
-        <h3>3. Установка web-серевера Apache</h3><!--Установка web-серевера Apache-->
-        <ul>
-            <li><code>~]# yum install <i>httpd</i></code></li>
-            <li><code>~]$ sudo systemctl enable httpd --now</code></li>
-            <li><code>~]# firewall-cmd --zone=public --add-service=http --permanent</code></li>
-            <li><code>~]# firewall-cmd --reload</code></li>
-        </ul>
-        <p>Готово</p>
-        <h3>3. Установка Nginx</h2>
-            <p><a href="https://nginx.org/ru/">Перейти на официальный сайт ngix.org</a></p>
-            <p><a href="https://nginx.org/ru/docs/">Читать документацию по Nginx</a></p>
-            <p>Nginix - модульный сервер. Реализует различные сцеанарии веб-серверов.В первую очередь Nginx это конечно же (сценарий) веб-сервер, но помимо этого он умеет выполнять функцию (сценарий) обратного проксирования, и даже (сценарий) балансировку нагрузки.</p>
-            <div>
-                <ul>
-                    <li><code>yum repolist</code></li>
-                    <li>Для установки Ngnix нужно 1)выбрать <b>поток</b> и выполнить установку; 2)открыть порт в межсетевом экране; 3)настроить автоматический запуск для службы nginx.</li>
-                    <li><code>yum modules list nginx </code> - вывести список модулей которые содержит Nginx. прим. Поток по умолчание обозначен "[d]".  </li>
-                    <li><code># yum install nginx</code></li>
-                    <li><code># firewall-cmd --list-all</code> - убедимся что по умолчанию <i>отсутствует разрешение на доступ по 80 порту.</i></li>
-                    <li>
-                        <p>добавим 80-ый порт в виде сервиса, сервис назывется "http"</p>
-                        <p><code>firewall-cmd --add-service=http </code> - это комнда добавит в активную конфигурацию</p>
-                        <p><code>firewall-cmd --add-service=http --permanent</code> - но также добавим и в постоянную конфигурацию</p>
-                        <p><code># firewall-cmd --list-all</code> - проверяем.</p>
-                    </li>
-                    <li>
-                        <p><code>~]$ systemctl status nginx.service</code> проверяем статус службы.</p>
-                        <p><code>~]$ systemctl status nginx.service</code> - включаем и добавляем в автозапуск.</p>
-                    </li>
-                </ul>
-                <p>После этого, технически уже можно начать пользоваться сервером. Вводите в браузере ip-адрес или доменное имя и проверяте.</p>
-                <h3>Конфигурация по умолчанию.</h3>
-                <p>Конфигурационный файл - /etc/nginx/nginx.conf . В нём веб-сервер настроен на работу на 80 порту, и намечен на каталог контента в /usr/share/nginx/html/</p>
-                <img src="/images/server/nginx_defolt_config.png" alt="default config Nginx" />
-            </div>
-            <h4>3.2 Настройка записей DNS</h4>
+            <p>Готово. После этого, технически уже можно начать пользоваться сервером. Вводите в браузере ip-адрес или доменное имя и проверяйте.</p>
+            <hr class="custom-hr" />
+        <h3>4. Настройка записей DNS</h3>
             <p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
-    </div>
 </article>
