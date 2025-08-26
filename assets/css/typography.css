@@ -2,7 +2,7 @@
 :root {
     --color-local: #458535;
     --color-remote: #7a6733;
-    --color-root:  #ef2929;
+    --color-root: #f37f7f;
     /*--color-rsync: rgb(158, 30, 94);*/
     --color-rsync: rgb(152, 105, 128);
     /*--color-attention: rgb(90, 39, 230);*/
@@ -35,12 +35,28 @@
     content: "remote";
 }
 
-.root {
+
+.root::before {
     color: var(--color-root);
+    content: "root";
     font-weight: bold;
 }
-.root::before {
-    content: "root";
+.root::after {
+    content: "#";
+    color: royalblue;
+    font-weight: bold;
+}
+
+
+.user::before {
+    color: var(--color-local);
+    content: "user";
+    font-weight: bold;
+}
+.user::after {
+    content: "$";
+    color: royalblue;
+    font-weight: bold;
 }
 
 .text-code-box > .text-dir {

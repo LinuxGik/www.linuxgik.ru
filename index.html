@@ -101,41 +101,52 @@ sidebar-path: sidebar-L/sidebar-L-default.html
         <ul>
             <li>
                 <p>
-                    <code class="text-code-box">
-                        <span class="root"></span> <span style="color: royalblue">#</span> useradd <i>new_username</i>
+                    <code class="path">
+                        <span class="root"></span>]<span style="color: royalblue">#</span> useradd <i>new_username</i>
                     </code> - добавляем пользователя.
                 </p>
             </li>
             <li>
                 <p>
-                    <code class="text-code-box">
-                        <span class="root"></span> <span style="color: royalblue">#</span> passwd <i>new_username</i>
+                    <code class="path">
+                        <span class="root"></span>]<span style="color: royalblue">#</span> passwd <i>new_username</i>
                     </code> - задаем ему пароль.
                 </p>
             </li>
             <li>
                 <p>
-                    <code class="text-code-box">
-                        <span class="root"></span> <span style="color: royalblue">#</span> usermod -aG
+                    <code class="path">
+                        <span class="root"></span>]<span style="color: royalblue">#</span> usermod -aG
                         <i>group_name1 group_name2... user_name</i>
                     </code> - добавляем пользователя в группу <b>wheel</b>.
                 </p>
             </li>
         </ul>
         <p>Выходим из сессии root и заходим под новым пользователем.</p>
+        <hr class="custom-hr" />
 
     <h3>2. Настройка SSH</h3>
-        <p>
-            Примечание. Для настройки ключей-SSH в Windows 11, читай <a href="pages/ssh-keys-windows.html">Настройки
+        <p class="note">
+            Примечание. Для настройки ключей-SSH в Windows 11, читай: <a href="pages/ssh-keys-windows.html">Настройки
             ключей-ssh в системе Windows</a>
         </p>
         <ul>
-            <li><code>~] $ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
-            <li><code>~] $ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.</li>
-            <li>Отключаем аутентификацию по паролю (в файле /etc/ssh/sshd_config) - <b>PasswordAuthentication no</b></li>
-            <li>Запрещаем логиниться от root (в файле /etc/ssh/sshd_config) - <b>PermitRootLogin no</b></li>
-            <li>Меняем порт (в файле /etc/ssh/sshd_config) - <b>Port #номер</b></li>
-            <li>Перезагружаем сервер <code>~]# systemct reload sshd</code></li>
+            <li><p><code class="path"><span class="user">]</span> ssh-keygen</code> - на клиенте генерируем пару ключей.</p></li>
+            <li>
+                <p>
+                    <code class="path"><span class="user">]</span> ssh-copy-id user@host</code> - копируем открытый ключ на удаленный сервер.
+                </p>
+            </li>
+            <li>
+                <figure>
+                    <figcaption>Открываем файл <span class="path">etc/ssh/sshd_config</span></figcaption>
+                    <ul>
+                        <li>Отключаем аутентификацию по паролю - <b>PasswordAuthentication no</b></li>
+                        <li>Запрещаем логиниться от root - <b>PermitRootLogin no</b></li>
+                        <li>Меняем порт - <b>Port #номер</b></li>
+                        <li>Перезагружаем сервер <code class="path"><span class="root">]</span> systemct reload sshd</code></li>
+                    </ul>
+                </figure>
             <li>
                 Далее нужно проверить, включен ли SeLinux:
                 <code>$ sestatus</code>
@@ -196,6 +207,4 @@ sidebar-path: sidebar-L/sidebar-L-default.html
             <h4>3.2 Настройка записей DNS</h4>
             <p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
     </div>
-
-
 </article>
