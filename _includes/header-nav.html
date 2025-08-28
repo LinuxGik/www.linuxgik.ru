@@ -5,9 +5,38 @@
         {% for item in site.data.navigation %}
             <li><a href="{{ item.link }}">{{ item.name }}</a></li>
         {% endfor %}
+        <li>
+            <form>
+                <input type="search" name="q" placeholder="Поиск недоступен">
+                <input type="submit" value="Go!">
+            </form>
+        </li>
     </ul>
 </nav>
 <!-- Конец первого блока навигации -->
-<p>Вы находитесь на главной странице портала.</p>
+
+
+
+
+<!-- то что идёт в шапке, сразу после главного меню. -->
+    <!-- Хлебные крошки -->
+<div class="breadcrumbs">
+{% if page.title == "Главная" %}
+    <span>Вы находитесь на главной странице портала.</span>
+{% else %}
+    <a href="/">Главная</a> &gt;
+    <span style="color: #73b101">{{ page.title }}</span>
+{% endif %}
+</div>
+
+
 <h1>{{ page.h1 }}</h1>
+    <!-- Если у страницы есть вставка в header -->
+    {% if page.embedding-header %}
+        {% include {{ page.embedding-header }} %}
+    {% endif %}
+
+
+
+
 

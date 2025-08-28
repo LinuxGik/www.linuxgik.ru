@@ -4,6 +4,13 @@ defaults:
     values:
       layout: "default"
       sidebar-path: sidebar-L/sidebar-L-default.html
+  - scope:
+      path: "pages/web-developers"
+    values:
+      h1: Веб-разработка
+      section: веб-разработка
+      embedding-header: embedding_header/wed-devel-header.html
+
 
 exclude:
  - forAI/

@@ -1,3 +1,8 @@
+/* Высота header */
+.site-header {
+    height: 155px;
+}
+
 /* Брендовое название в меню - переход в главное меню */
 .linux {
     font-weight: bold;
@@ -8,6 +13,7 @@
     color: #bbdd0e;
 }
 
+/* .site-nav применяетс к тегу ul который внутри nav */
 .site-nav {
     display: flex;
     padding-left: .5em;
@@ -22,7 +28,10 @@
 }
 
  .site-nav > li:last-child {
+     padding-top: 3px;
+     padding-bottom: 3px;
      padding-right: 1em;
+
  }
 .site-nav > li > a {
     display: block;
@@ -43,14 +52,24 @@
     margin-left: auto;
 }
 
-header > .under-nav {
-    font-size: 12px;
+
+
+/* Хлебные крошки */
+.breadcrumbs {
+    padding-top: 1em;
 }
 
-header > .under-nav > h1 {
-    margin: 0;
+header > h1 {
+    margin-top: 8px;
+    margin-bottom: 0;
 }
-
+/* то что под h1 */
+.he-under-h1 {
+    color: #a6a67c;
+    /*color: #D4AF37;*/
+    font-style: italic;
+    font-size: 11px;
+}
 /*.under-nav > h1 {*/
 /*    margin-top: 0;*/
 /*}*/

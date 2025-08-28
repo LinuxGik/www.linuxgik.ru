@@ -1,8 +1,10 @@
 @import url("fonts/fonts.css");
+@import url("variables/color-tail.css");
 @import url("typography.css");
 @import url("header-nav.css");
 @import url("code.css");
 @import url("sidebar-L.css");
+
 
 /* Теги */
 body {
@@ -29,13 +31,31 @@ body {
     background-color: #fbf1ec;
     border-radius: 12px;
     margin-top: 0;
-}
-
-main article:last-of-type {
     margin-bottom: 1em;
 }
+
 .article-header {
+    display: flex;
     border-bottom: 1px solid #e1e1e1;
+}
+.type-h2-header::before {
+    content: "Тип:";
+    color: var(--color-neutral-300);
+}
+
+.type-h2-header {
+    font-size: 0.7em;
+    margin-left: auto;
+    padding-right: 1em;
+}
+.type-full::after {
+    color: var(--color-emerald-200);
+    content: "полноценный материал";
+}
+.type-briefly::after {
+    color: var(--color-rose-200);
+    content: "кратакая инструкция";
+
 }
 
 .article-box > h3 {
