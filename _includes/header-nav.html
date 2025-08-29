@@ -1,10 +1,19 @@
-<!-- Первый блок навигации -->
+<!-- Первый блок шапки (header) - главная навигация -->
 <nav>
     <ul class="site-nav">
-            <li><a href="/index.html"><span class="linux">Linux</span><span class="gik">Gik</span></a></li>
+            <li class="brand-button">
+                <p>
+                <a href="/index.html"><span class="linuxgik"></span></a>
+                {% if page.section %}
+                    <span class="{{ page.brand }}">{{ page.section }}</span>
+                {% endif %}
+                </p>
+            </li>
+            {% if  page.index %}
         {% for item in site.data.navigation %}
             <li><a href="{{ item.link }}">{{ item.name }}</a></li>
         {% endfor %}
+        {% endif %}
         <li>
             <form>
                 <input type="search" name="q" placeholder="Поиск недоступен">
@@ -15,26 +24,48 @@
 </nav>
 <!-- Конец первого блока навигации -->
 
+<!-- То что идёт в header (шапке), сразу после главного меню. Этот блок разделён на два блока.
+ В первом блоке (левом) - Breadcrumbs ->->под ним->-> h1 ->->под ним ->-> page.embeding-header
+ Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
 
+<!-- Второй блок шапки (header)  -->
+<div class="level-two-header-left">
 
-
-<!-- то что идёт в шапке, сразу после главного меню. -->
     <!-- Хлебные крошки -->
-<div class="breadcrumbs">
-{% if page.title == "Главная" %}
-    <span>Вы находитесь на главной странице портала.</span>
-{% else %}
-    <a href="/">Главная</a> &gt;
-    <span style="color: #73b101">{{ page.title }}</span>
-{% endif %}
+        <div class="breadcrumbs">
+        {% if page.title == "Главная" %}
+            <span>Вы находитесь на главной странице портала.</span>
+        {% else %}
+            <a href="/">Главная</a> &gt;
+            <span style="color: #73b101">{{ page.title }}</span>
+        {% endif %}
+        </div>
+
+    <!-- h1 и if page.embedding-menu -->
+        <h1>{{ page.h1 }}</h1>
+        <!-- Если у страницы есть вставка в header -->
+        {% if page.embedding-h1 %}
+            {% include {{ page.embedding-h1 }} %}
+        {% endif %}
 </div>
 
-
-<h1>{{ page.h1 }}</h1>
-    <!-- Если у страницы есть вставка в header -->
-    {% if page.embedding-header %}
-        {% include {{ page.embedding-header }} %}
-    {% endif %}
+    <!-- Меню подразделов -->
+{% if page.sudsection %}
+<div class="level-two-header-right">
+    <figure><figcaption>Навигация по разделу</figcaption><ul class="site-submenu">
+        <li><a href="/pages/web-developers/css/css-index.html">Раздел CSS</a></li>
+    </ul></figure>
+</div>
+{% endif %}
 
 
 

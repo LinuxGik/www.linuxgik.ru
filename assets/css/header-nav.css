@@ -1,19 +1,36 @@
-/* Высота header */
+/* Высота header размер шрифта. <header class="site-header"> _layouts/default.html*/
 .site-header {
     height: 155px;
+    font-size: 12px;
 }
 
-/* Брендовое название в меню - переход в главное меню */
-.linux {
+/* Брендовые название в меню - переход в главное меню */
+    /* Общее к брендовой кнопке <li class="brand-button">  */
+.brand-button {
+    display: flex;
     font-weight: bold;
+    font-family: open, sans-serif;
+    font-size: 13px;
+}
+.brand-button p {
+    margin: 0;
+    padding: 3px 1em;
+}
+.linuxgik::before {
+    content: "Linux";
     color: #aded16;
 }
-.gik {
-    font-weight: bold;
+.linuxgik::after {
+    content: "Gik";
     color: #bbdd0e;
 }
-
-/* .site-nav применяетс к тегу ul который внутри nav */
+    /* У каждого раздела своя брендовая кнопка */
+    /* Веб-разработка */
+.web-dev {
+    color: #1572B6;
+}
+/* Первый блок */
+/* .site-nav применяется к тегу ul который внутри nav */
 .site-nav {
     display: flex;
     padding-left: .5em;
@@ -52,24 +69,75 @@
     margin-left: auto;
 }
 
+/* Второй блок - разделен на два подблока. 1.level-two-header-left и  2.level-two-header-right*/
 
+/* делаем одинаковую ширину  */
+.level-two-header-left {
+    float: left;
+    width: 50%
+}
+.level-two-header-right {
+    float: left;
+    width: 50%;
+}
 
-/* Хлебные крошки */
+/* правила для правого подблока - level-two-header-left */
+
+    /* Хлебные крошки */
 .breadcrumbs {
     padding-top: 1em;
 }
 
-header > h1 {
+.level-two-header-left > h1 {
     margin-top: 8px;
     margin-bottom: 0;
 }
 /* то что под h1 */
-.he-under-h1 {
+.embedding-h1 {
     color: #a6a67c;
     /*color: #D4AF37;*/
     font-style: italic;
     font-size: 11px;
 }
-/*.under-nav > h1 {*/
-/*    margin-top: 0;*/
-/*}*/
+
+/* Правила для левого блока - level-two-header-right */
+.level-two-header-right > figure {
+    /*box-shadow: 3px 3px 8px 0 black,*/
+    /* -3px -3px 8px 0 white;*/
+    border: solid 1px #000000;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 1em;
+}
+.level-two-header-right > figure > figcaption
+{
+    text-align: center;
+}
+
+    /* Оформляем меню раздела */
+.site-submenu {                 /*  site-submenu - класс для <ul class="site-submenu">   */
+    display: flex;
+    padding-left: .5em;
+    background-color: oklch(0.94 0.02 62.78);
+    list-style-type: none;
+    border-radius: .1em;
+    margin: 0;
+}
+.site-submenu > li {
+    margin-top: 0;
+}
+
+.site-submenu > li > a {
+    display: block;
+    padding: 0 1em;
+    background-color: oklch(0.94 0.02 62.78);
+    color: oklch(0.32 0 0);
+    text-decoration: none;
+    font-family: "open", sans-serif;
+    /*font-size: 13px;*/
+}
+
+.site-submenu > li > a:hover {
+    text-decoration: underline;
+    color: #9ff300;
+}

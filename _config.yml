@@ -8,8 +8,9 @@ defaults:
       path: "pages/web-developers"
     values:
       h1: Веб-разработка
-      section: веб-разработка
-      embedding-header: embedding_header/wed-devel-header.html
+      section: Веб-разработка
+      brand: web-dev
+      embedding-h1: embedding_h1/wed-devel-header.html
 
 
 exclude:
