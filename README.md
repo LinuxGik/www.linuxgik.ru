@@ -1,1 +1,1 @@
-# linuxgik.github.io
+# linuxgik.ru
