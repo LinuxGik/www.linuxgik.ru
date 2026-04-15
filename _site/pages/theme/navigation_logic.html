@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik  - Логика навигации: LinuxGIk </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <span class="linuxgik"></span>
+                
+            </p>
+        </li>
+        
+                
+        <li><a href="/web-dev">Веб-разработка</a></li>
+                
+        <li><a href="/pages/blog">Блог</a></li>
+                
+        <li><a href="/pages/theme/index_theme.html">Тема LinuxGIk</a></li>
+                
+        
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <span>Вы находитесь на главной странице портала.</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <article class="article-box">
+    <header class="article-header">
+        <h2>Как работает меню на портале</h2>
+    </header>
+    <p>
+        Навигация на портале <strong>LinuxGIk</strong> динамическая и управляется через два основных файла в каталоге <code>_includes/</code> и YAML-данные в <code>_data/navigation.yml</code>.
+    </p>
+
+    <hr class="custom-hr" />
+
+    <h3>1. Точка входа (Layout)</h3>
+    <p>
+        Вся логика начинается в главном шаблоне сайта. Именно здесь подключаются скрипты, отвечающие за расчет разделов и отрисовку меню.
+    </p>
+
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid royalblue; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: royalblue; font-weight: bold;">Файл: _layouts/default.html</span>
+        <pre style="margin-top: 10px; color: #d0c6c6;"><code>&lt;body class="grid-container"&gt;
+
+    {% include logika_header_sidebar.html %}
+
+    &lt;header class="site-header"&gt;
+        {% include header_nav.html %}
+    &lt;/header&gt;
+...</code></pre>
+    </div>
+
+    <hr class="custom-hr" />
+
+    <h3>2. Определение текущего раздела (logika_header_sidebar.html)</h3>
+    <p>Этот файл инклудится первым в <code>default.html</code>. Его задача — "понять", где сейчас находится пользователь, сравнив текущий URL страницы со списком разделов в <code>navigation.yml</code>.</p>
+    
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid royalblue; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: royalblue; font-weight: bold;">Файл: _includes/logika_header_sidebar.html</span>
+        <pre style="margin-top: 10px; color: #b1a0a0;"><code>{% for item in site.data.navigation.nav %}
+    {% if page.url contains item.link %}
+        {% assign current_section = item %}
+...</code></pre>
+    </div>
+
+    <p><strong>Суть процесса:</strong></p>
+    <ul>
+        <li>Он берет список всех разделов из <code>site.data.navigation.nav</code>.</li>
+        <li>Если в URL страницы содержится ссылка на раздел, то раздел помечается как <code>current_section</code>.</li>
+        <li>Если внутри раздела есть подразделы (subsection), он ищет совпадение в них и помечает <code>current_subsection</code>.</li>
+    </ul>
+
+    <hr class="custom-hr" />
+
+    <h3>3. Вывод элементов в меню (header_nav.html)</h3>
+    <p>Этот файл отвечает за визуальное отображение. В нем используется цикл <code>for</code>, который рисует ссылки в шапке сайта.</p>
+
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid #73b101; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: #73b101; font-weight: bold;">Файл: _includes/header_nav.html</span>
+        <pre style="margin-top: 10px; color: #c3b4b4;"><code>{% else %}
+    {% for item in site.data.navigation.nav %}
+        &lt;li&gt;&lt;a href="{{ item.link }}"&gt;{{ item.name }}&lt;/a&gt;&lt;/li&gt;
+    {% endfor %}
+{% endif %}</code></pre>
+    </div>
+
+    <p>На данный момент этот код берет <strong>абсолютно все</strong> элементы из навигации и выводит их в шапку.</p>
+
+    <hr class="custom-hr" />
+
+    <h3>4. Зачем нам нужен "hidden"?</h3>
+    <p>Именно здесь мы планируем внести изменения. Нам нужно добавить проверку: если у элемента в <code>navigation.yml</code> стоит метка <code>hidden: true</code>, то цикл в <code>header_nav.html</code> должен его пропустить.</p>
+    
+    <p>При этом <code>logika_header_sidebar.html</code> всё равно "увидит" этот раздел, и у нас будут правильно работать хлебные крошки и сайдбары.</p>
+</article>
+
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

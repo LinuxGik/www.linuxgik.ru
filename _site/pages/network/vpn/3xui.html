@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <span class="linuxgik"></span>
+                
+            </p>
+        </li>
+        
+                
+        <li><a href="/web-dev">Веб-разработка</a></li>
+                
+        <li><a href="/pages/blog">Блог</a></li>
+                
+        <li><a href="/pages/theme/index_theme.html">Тема LinuxGIk</a></li>
+                
+        
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <span>Вы находитесь на главной странице портала.</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <h1 id="установка-настройка-безопасность-и-использование-панели-3x-ui-для-vpn">Установка, настройка, безопасность и использование панели 3X-UI для VPN</h1>
+
+<hr />
+
+<h2 id="что-такое-3x-ui">Что такое 3X-UI</h2>
+
+<p><strong>3X-UI</strong> — это продвинутая веб-панель с открытым исходным кодом для управления ядром <strong>Xray-core</strong>. Позволяет создавать и управлять VPN-подключениями через веб-интерфейс, без ручного редактирования конфигурационных файлов.</p>
+
+<p><strong>Поддерживаемые протоколы:</strong> VLESS, VMess, Trojan, Shadowsocks, WireGuard, Socks, HTTP, Modem-door</p>
+
+<p><strong>Поддерживаемые транспорты:</strong> TCP, WebSocket, gRPC, HTTPUpgrade, XHTTP, REALITY, XTLS (Vision, Direct)</p>
+
+<blockquote>
+  <p>📌 Официальный репозиторий: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui</a>
+📌 Официальная Wiki: <a href="https://github.com/MHSanaei/3x-ui/wiki">github.com/MHSanaei/3x-ui/wiki</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="1-подготовка-сервера">1. Подготовка сервера</h2>
+
+<h3 id="11-требования-к-серверу">1.1 Требования к серверу</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Минимум (1–3 пользователя)</th>
+      <th>Рекомендуется (10–50 пользователей)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CPU</td>
+      <td>1 vCore, 1 GHz</td>
+      <td>2–4 vCore</td>
+    </tr>
+    <tr>
+      <td>RAM</td>
+      <td>512 MB</td>
+      <td>2–4 GB</td>
+    </tr>
+    <tr>
+      <td>Диск</td>
+      <td>5 GB (SSD)</td>
+      <td>20+ GB (SSD/NVMe)</td>
+    </tr>
+    <tr>
+      <td>Сеть</td>
+      <td>10 Mbps</td>
+      <td>100+ Mbps</td>
+    </tr>
+    <tr>
+      <td>ОС</td>
+      <td>Debian 11/12, Ubuntu 22.04+</td>
+      <td>Ubuntu 22.04 LTS / Debian 12</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://3x-ui.com/what-are-3x-ui-system-requirements/">3x-ui.com/system-requirements</a></p>
+</blockquote>
+
+<h3 id="12-начальная-настройка-сервера">1.2 Начальная настройка сервера</h3>
+
+<p>Перед установкой 3X-UI выполните базовую подготовку сервера:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Обновление системы</span>
+apt update <span class="o">&amp;&amp;</span> apt upgrade <span class="nt">-y</span>
+
+<span class="c"># Установка необходимых пакетов</span>
+apt <span class="nb">install </span>wget curl <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h3 id="13-настройка-ssh">1.3 Настройка SSH</h3>
+
+<p>Следуйте инструкции из предыдущей статьи: генерация ключей, отключение входа по паролю, запрет root-входа, смена порта, настройка firewall.</p>
+
+<blockquote>
+  <p>⚠️ <strong>Критически важно:</strong> Не закрывайте текущую SSH-сессию, пока не убедитесь, что вход по новому порту работает.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="2-установка-3x-ui">2. Установка 3X-UI</h2>
+
+<h3 id="21-стандартная-установка-рекомендуется">2.1 Стандартная установка (рекомендуется)</h3>
+
+<p>Из официальной инструкции нужно сделать так:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash &lt;<span class="o">(</span>curl <span class="nt">-Ls</span> https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh<span class="o">)</span>
+</code></pre></div></div>
+<p>Но так у меня не устанавливается. Поэтому я делаю так:</p>
+<h4 id="качаю-скрипт">Качаю скрипт</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-Ls</span> https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh <span class="nt">-o</span> install.sh
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x install.sh
+<span class="nb">sudo </span>bash install.sh
+</code></pre></div></div>
+
+<p>В процессе установки скрипт задаст вопросы:</p>
+
+<ol>
+  <li><strong>Would you like to customize the Panel Port settings? (If not, a random port will be applied) [y/n]:</strong>   <strong>Настроить порт панели?</strong> → Ответьте <code class="language-plaintext highlighter-rouge">y</code> и укажите нестандартный порт из диапазона <strong>41000–65000</strong> (например, <code class="language-plaintext highlighter-rouge">54321</code>)</li>
+  <li><strong>For security, SSL certificate is required for all panels.
+Let’s Encrypt now supports both domains and IP addresses!</strong> - Предложение установить сертификат SSL. Он нужен для панели управления. Я тут выбрал 1 вариант для домена.</li>
+  <li><strong>Please enter your domain name:</strong></li>
+</ol>
+
+<p>После установки вы увидите:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>###############################################
+Username: ваш_логин
+Password: ваш_пароль
+Port: 54321
+###############################################
+</code></pre></div></div>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui — Quick Start</a></p>
+</blockquote>
+
+<p><strong>Сохраните эти данные!</strong></p>
+
+<h3 id="22-установка-через-docker">2.2 Установка через Docker</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Установить Docker</span>
+bash &lt;<span class="o">(</span>curl <span class="nt">-sSL</span> https://get.docker.com<span class="o">)</span>
+
+<span class="c"># 2. Клонировать репозиторий</span>
+git clone https://github.com/MHSanaei/3x-ui.git
+<span class="nb">cd </span>3x-ui
+
+<span class="c"># 3. Запустить контейнер</span>
+docker compose up <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>Или вручную:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-itd</span> <span class="se">\</span>
+   <span class="nt">-e</span> <span class="nv">XRAY_VMESS_AEAD_FORCED</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+   <span class="nt">-v</span> <span class="nv">$PWD</span>/db/:/etc/x-ui/ <span class="se">\</span>
+   <span class="nt">-v</span> <span class="nv">$PWD</span>/cert/:/root/cert/ <span class="se">\</span>
+   <span class="nt">--network</span><span class="o">=</span>host <span class="se">\</span>
+   <span class="nt">--restart</span><span class="o">=</span>unless-stopped <span class="se">\</span>
+   <span class="nt">--name</span> 3x-ui <span class="se">\</span>
+   ghcr.io/mhsanaei/3x-ui:latest
+</code></pre></div></div>
+
+<blockquote>
+  <p>⚠️ <strong>При установке через Docker</strong> данные по умолчанию: логин <code class="language-plaintext highlighter-rouge">admin</code>, пароль <code class="language-plaintext highlighter-rouge">admin</code>, порт <code class="language-plaintext highlighter-rouge">2053</code>. <strong>Обязательно смените их сразу после первого входа!</strong></p>
+</blockquote>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui/wiki">github.com/MHSanaei/3x-ui — Docker</a></p>
+</blockquote>
+
+<h3 id="23-установка-конкретной-версии">2.3 Установка конкретной версии</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">VERSION</span><span class="o">=</span>v2.8.11 <span class="o">&amp;&amp;</span> bash &lt;<span class="o">(</span>curl <span class="nt">-Ls</span> <span class="s2">"https://raw.githubusercontent.com/mhsanaei/3x-ui/</span><span class="nv">$VERSION</span><span class="s2">/install.sh"</span><span class="o">)</span> <span class="nv">$VERSION</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-настройка-ssl-сертификата-для-панели">3. Настройка SSL-сертификата для панели</h2>
+
+<blockquote>
+  <p>⚠️ <strong>Никогда не подключайтесь к панели по HTTP!</strong> Данные передаются в открытом виде. Используйте HTTPS или SSH-туннель.</p>
+</blockquote>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://docs.edisglobal.com/advanced-setup-guides/install-3x-ui-on-vps/install-3x-ui-on-ubuntu-2204">docs.edisglobal.com — Connect to the 3x-ui panel</a></p>
+</blockquote>
+
+<h3 id="31-через-acme-встроенный-механизм">3.1 Через ACME (встроенный механизм)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui
+</code></pre></div></div>
+
+<p>Выберите в меню: <strong>SSL Certificate Management</strong> → укажите ваш домен.</p>
+
+<h3 id="32-через-certbot-lets-encrypt">3.2 Через Certbot (Let’s Encrypt)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Установить Certbot</span>
+apt <span class="nb">install </span>certbot <span class="nt">-y</span>
+
+<span class="c"># Получить сертификат (замените domain.com на ваш домен)</span>
+certbot certonly <span class="nt">--standalone</span> <span class="nt">-d</span> domain.com
+
+<span class="c"># Автообновление (добавить в cron)</span>
+<span class="nb">echo</span> <span class="s2">"0 0 * * 1 certbot renew --quiet"</span> | crontab -
+</code></pre></div></div>
+
+<h3 id="33-через-cloudflare">3.3 Через Cloudflare</h3>
+
+<p>Если ваш домен управляется через Cloudflare:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui
+</code></pre></div></div>
+
+<p>Выберите: <strong>Cloudflare SSL Certificate</strong> → введите:</p>
+<ul>
+  <li>Имя домена</li>
+  <li>Email аккаунта Cloudflare</li>
+  <li>Global API Key</li>
+</ul>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui — SSL Certificate</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="4-безопасность-панели">4. Безопасность панели</h2>
+
+<p>По данным исследователей безопасности, наиболее частые уязвимости 3X-UI — <strong>операционные, а не криптографические</strong>:</p>
+
+<ul>
+  <li>Пакеты системы не обновлены</li>
+  <li>Firewall отсутствует или настроен разрешительно</li>
+  <li>SSL-сертификат не настроен</li>
+  <li>Панель открыта напрямую в интернет</li>
+  <li>Учётные данные по умолчанию не сменены</li>
+</ul>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://elevenlabsmagazine.com/3x-ui-deep-dive-secure-xray-server-management/">elevenlabsmagazine.com — 3X-UI Deep Dive</a></p>
+</blockquote>
+
+<h3 id="41-смена-учётных-данных-и-порта">4.1 Смена учётных данных и порта</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui
+</code></pre></div></div>
+
+<p>В меню управления выберите:</p>
+<ul>
+  <li><strong>6</strong> — Сбросить логин/пароль</li>
+  <li><strong>9</strong> — Сменить порт панели</li>
+  <li><strong>7</strong> — Сбросить веб-путь (Web Base Path)</li>
+</ul>
+
+<p><strong>Рекомендация:</strong> Используйте длинный случайный путь, например:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://domain.com:54321/xK9mP2vL8qR/panel
+</code></pre></div></div>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui — Default Settings / Security Recommendation</a></p>
+</blockquote>
+
+<h3 id="42-настройка-firewall">4.2 Настройка firewall</h3>
+
+<h4 id="debian--ubuntu-ufw">Debian / Ubuntu (UFW)</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Установить UFW</span>
+apt <span class="nb">install </span>ufw <span class="nt">-y</span>
+
+<span class="c"># Открыть SSH-порт (замените #порт на ваш)</span>
+ufw allow <span class="c">#порт/tcp</span>
+
+<span class="c"># Открыть порт панели (замените #порт)</span>
+ufw allow <span class="c">#порт_панели/tcp</span>
+
+<span class="c"># Открыть порт VPN-подключения (например, 443)</span>
+ufw allow 443/tcp
+
+<span class="c"># Включить firewall</span>
+ufw <span class="nb">enable</span>
+
+<span class="c"># Проверить</span>
+ufw status
+</code></pre></div></div>
+
+<h4 id="centos--rhel-firewalld">CentOS / RHEL (firewalld)</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd <span class="nt">--add-port</span><span class="o">=</span><span class="c">#порт_ssh/tcp</span>
+firewall-cmd <span class="nt">--add-port</span><span class="o">=</span><span class="c">#порт_панели/tcp</span>
+firewall-cmd <span class="nt">--add-port</span><span class="o">=</span>443/tcp
+firewall-cmd <span class="nt">--runtime-to-permanent</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>⚠️ <strong>Порядок критичен:</strong> сначала откройте нужные порты, потом включайте firewall. Иначе вы потеряете доступ.</p>
+</blockquote>
+
+<h3 id="43-защита-от-подбора-паролей-fail2ban">4.3 Защита от подбора паролей (Fail2Ban)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Установить</span>
+apt <span class="nb">install </span>fail2ban <span class="nt">-y</span>
+
+<span class="c"># Создать локальную конфигурацию</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> /etc/fail2ban/jail.local <span class="o">&lt;&lt;</span> <span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+[DEFAULT]
+bantime = 3600
+findtime = 600
+maxretry = 5
+
+[sshd]
+enabled = true
+port = #порт_ssh
+filter = sshd
+logpath = /var/log/auth.log
+</span><span class="no">EOF
+
+</span><span class="c"># Запустить</span>
+systemctl <span class="nb">enable </span>fail2ban
+systemctl start fail2ban
+</code></pre></div></div>
+
+<h3 id="44-система-обязательного-доступа-mac">4.4 Система обязательного доступа (MAC)</h3>
+
+<p><strong>CentOS / RHEL (SELinux):</strong> при использовании нестандартного порта для VPN:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sestatus
+yum <span class="nb">install </span>policycoreutils-python-utils
+semanage port <span class="nt">-a</span> <span class="nt">-t</span> ssh_port_t <span class="nt">-p</span> tcp <span class="c">#порт</span>
+</code></pre></div></div>
+
+<p><strong>Debian / Ubuntu (AppArmor):</strong> по умолчанию не ограничивает привязку Xray к нестандартным портам — дополнительных действий не требуется.</p>
+
+<h3 id="45-включение-tcp-bbr">4.5 Включение TCP BBR</h3>
+
+<p>Ускоряет сетевой трафик и снижает задержки:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"net.core.default_qdisc=fq"</span> <span class="o">&gt;&gt;</span> /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.tcp_congestion_control=bbr"</span> <span class="o">&gt;&gt;</span> /etc/sysctl.conf
+sysctl <span class="nt">-p</span>
+</code></pre></div></div>
+
+<p>Проверить:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sysctl net.ipv4.tcp_congestion_control
+<span class="c"># Должно быть: net.ipv4.tcp_congestion_control = bbr</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://3x-ui.com/what-are-3x-ui-system-requirements/">3x-ui.com — system requirements, BBR</a></p>
+</blockquote>
+
+<h3 id="46-автообновление-системы">4.6 Автообновление системы</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>unattended-upgrades <span class="nt">-y</span>
+dpkg-reconfigure <span class="nt">-plow</span> unattended-upgrades
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="5-настройка-vpn-подключения-inbound">5. Настройка VPN-подключения (Inbound)</h2>
+
+<h3 id="51-рекомендуемая-конфигурация-vless--reality">5.1 Рекомендуемая конфигурация: VLESS + Reality</h3>
+
+<p><strong>VLESS + Reality</strong> — на данный момент самый стойкий к обнаружению и блокировке вариант. Трафик маскируется под обычное HTTPS-подключение к реальному сайту, не требуя собственного домена и SSL-сертификата для самого туннеля.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Протокол</th>
+      <th>Стелс</th>
+      <th>Скорость</th>
+      <th>Сложность настройки</th>
+      <th>Требует домен</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VLESS + Reality</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>Средняя</td>
+      <td>Нет</td>
+    </tr>
+    <tr>
+      <td>VLESS + WS + TLS</td>
+      <td>★★★★</td>
+      <td>★★★</td>
+      <td>Средняя</td>
+      <td>Да</td>
+    </tr>
+    <tr>
+      <td>VMess + WS + TLS</td>
+      <td>★★★</td>
+      <td>★★★</td>
+      <td>Средняя</td>
+      <td>Да</td>
+    </tr>
+    <tr>
+      <td>Trojan</td>
+      <td>★★★★★</td>
+      <td>★★★★</td>
+      <td>Средняя</td>
+      <td>Да</td>
+    </tr>
+    <tr>
+      <td>Shadowsocks</td>
+      <td>★★</td>
+      <td>★★★★</td>
+      <td>Простая</td>
+      <td>Нет</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>📌 Источники: <a href="https://vpn07.com/en/blog/2026-shadowrocket-protocols-vless-vmess-trojan-shadowsocks-comparison.html">vpn07.com — Protocol comparison 2026</a>, <a href="https://www.zhuquejiasu.com/en/blog/v2ray-trojan-vless-vmess-protocol-comparison-pros-cons-and-use-cases">zhuquejiasu.com — Protocol comparison</a>, <a href="https://grokipedia.com/page/VLESS">grokipedia.com — VLESS</a></p>
+</blockquote>
+
+<h3 id="52-пошаговая-настройка-vless--reality">5.2 Пошаговая настройка VLESS + Reality</h3>
+
+<ol>
+  <li>В панели перейдите <strong>Inbounds</strong> → <strong>Add Inbound</strong></li>
+  <li>Заполните поля:</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Поле</th>
+      <th>Значение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Remark</td>
+      <td>Произвольное имя подключения</td>
+    </tr>
+    <tr>
+      <td>Protocol</td>
+      <td><code class="language-plaintext highlighter-rouge">vless</code></td>
+    </tr>
+    <tr>
+      <td>Port</td>
+      <td><code class="language-plaintext highlighter-rouge">443</code> (или другой)</td>
+    </tr>
+    <tr>
+      <td>Transmission</td>
+      <td><code class="language-plaintext highlighter-rouge">TCP (RAW)</code></td>
+    </tr>
+    <tr>
+      <td>Security</td>
+      <td><code class="language-plaintext highlighter-rouge">Reality</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>В секции <strong>Reality</strong>:
+    <ul>
+      <li>Нажмите <strong>Get New Cert</strong> — система автоматически сгенерирует пару ключей</li>
+      <li><strong>uTLS:</strong> <code class="language-plaintext highlighter-rouge">chrome</code> или <code class="language-plaintext highlighter-rouge">firefox</code></li>
+      <li><strong>SNI (Server Names):</strong> укажите реально существующий сайт, например <code class="language-plaintext highlighter-rouge">dl.google.com</code>, <code class="language-plaintext highlighter-rouge">www.microsoft.com</code>, <code class="language-plaintext highlighter-rouge">www.apple.com</code></li>
+      <li><strong>Dest:</strong> тот же сайт с портом, например <code class="language-plaintext highlighter-rouge">dl.google.com:443</code></li>
+    </ul>
+  </li>
+  <li>В секции <strong>Client</strong>:
+    <ul>
+      <li><strong>Email:</strong> уникальный идентификатор пользователя (обязательно для учёта трафика)</li>
+      <li><strong>Flow:</strong> <code class="language-plaintext highlighter-rouge">xtls-rprx-vision</code> (для XTLS)</li>
+    </ul>
+  </li>
+  <li>Нажмите <strong>Create</strong></li>
+</ol>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://wiki.senko.digital/vpn/3x-ui">wiki.senko.digital — VLESS + Reality</a>, <a href="https://docs.edisglobal.com/advanced-setup-guides/install-3x-ui-on-vps/install-3x-ui-on-ubuntu-2204">docs.edisglobal.com — VLESS setup</a></p>
+</blockquote>
+
+<h3 id="53-настройка-ограничений">5.3 Настройка ограничений</h3>
+
+<p>Для каждого подключения (inbound) и каждого пользователя можно задать:</p>
+
+<ul>
+  <li><strong>Лимит IP-адресов</strong> — количество одновременных подключений с разных IP</li>
+  <li><strong>Срок действия</strong> — дата истечения (в днях)</li>
+  <li><strong>Лимит трафика</strong> — максимальный объём данных (в GB)</li>
+</ul>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui — Features</a></p>
+</blockquote>
+
+<h3 id="54-альтернативные-конфигурации">5.4 Альтернативные конфигурации</h3>
+
+<h4 id="vmess--websocket--tls">VMess + WebSocket + TLS</h4>
+
+<p>Требует домена и SSL-сертификата. Позволяет использовать CDN (Cloudflare) для скрытия IP сервера.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Поле</th>
+      <th>Значение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Protocol</td>
+      <td><code class="language-plaintext highlighter-rouge">vmess</code></td>
+    </tr>
+    <tr>
+      <td>Port</td>
+      <td><code class="language-plaintext highlighter-rouge">443</code></td>
+    </tr>
+    <tr>
+      <td>Transmission</td>
+      <td><code class="language-plaintext highlighter-rouge">ws</code></td>
+    </tr>
+    <tr>
+      <td>Path</td>
+      <td><code class="language-plaintext highlighter-rouge">/любой-путь</code></td>
+    </tr>
+    <tr>
+      <td>Security</td>
+      <td><code class="language-plaintext highlighter-rouge">tls</code></td>
+    </tr>
+    <tr>
+      <td>Домен, сертификат</td>
+      <td>Указать в настройках TLS</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="trojan">Trojan</h4>
+
+<p>Маскирует трафик под обычный HTTPS. Требует домен и валидный SSL-сертификат.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Поле</th>
+      <th>Значение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Protocol</td>
+      <td><code class="language-plaintext highlighter-rouge">trojan</code></td>
+    </tr>
+    <tr>
+      <td>Port</td>
+      <td><code class="language-plaintext highlighter-rouge">443</code></td>
+    </tr>
+    <tr>
+      <td>Transmission</td>
+      <td><code class="language-plaintext highlighter-rouge">tcp</code></td>
+    </tr>
+    <tr>
+      <td>Security</td>
+      <td><code class="language-plaintext highlighter-rouge">tls</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="6-подключение-клиентов">6. Подключение клиентов</h2>
+
+<p>После создания inbound в панели можно получить ссылку/QR-код для клиента: нажмите иконку рядом с пользователем → скопируйте конфигурацию.</p>
+
+<h3 id="61-клиенты-по-платформам">6.1 Клиенты по платформам</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Платформа</th>
+      <th>Клиент</th>
+      <th>Ссылка</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Windows</strong></td>
+      <td>v2rayN</td>
+      <td><a href="https://github.com/2dust/v2rayN">github.com/2dust/v2rayN</a></td>
+    </tr>
+    <tr>
+      <td><strong>Windows</strong></td>
+      <td>Hiddify</td>
+      <td><a href="https://github.com/hiddify/hiddify-app">github.com/hiddify/hiddify-app</a></td>
+    </tr>
+    <tr>
+      <td><strong>Windows</strong></td>
+      <td>NekoRay</td>
+      <td><a href="https://github.com/MatsuriDayo/nekoray">github.com/MatsuriDayo/nekoray</a></td>
+    </tr>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td>FoXray</td>
+      <td><a href="https://github.com/FoXray-com/FoXray">github.com/FoXray</a></td>
+    </tr>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td>V2rayU</td>
+      <td><a href="https://github.com/yanue/V2rayU">github.com/yanue/V2rayU</a></td>
+    </tr>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td>Hiddify</td>
+      <td><a href="https://github.com/hiddify/hiddify-app">github.com/hiddify/hiddify-app</a></td>
+    </tr>
+    <tr>
+      <td><strong>Linux</strong></td>
+      <td>Hiddify</td>
+      <td><a href="https://github.com/hiddify/hiddify-app">github.com/hiddify/hiddify-app</a></td>
+    </tr>
+    <tr>
+      <td><strong>Linux</strong></td>
+      <td>NekoRay</td>
+      <td><a href="https://github.com/MatsuriDayo/nekoray">github.com/MatsuriDayo/nekoray</a></td>
+    </tr>
+    <tr>
+      <td><strong>Linux</strong></td>
+      <td>v2rayA</td>
+      <td><a href="https://github.com/v2rayA/v2rayA">github.com/v2rayA/v2rayA</a></td>
+    </tr>
+    <tr>
+      <td><strong>Android</strong></td>
+      <td>v2rayNG</td>
+      <td><a href="https://github.com/2dust/v2rayNG">github.com/2dust/v2rayNG</a></td>
+    </tr>
+    <tr>
+      <td><strong>Android</strong></td>
+      <td>Hiddify</td>
+      <td><a href="https://github.com/hiddify/hiddify-app">github.com/hiddify/hiddify-app</a></td>
+    </tr>
+    <tr>
+      <td><strong>iOS</strong></td>
+      <td>Streisand</td>
+      <td>App Store</td>
+    </tr>
+    <tr>
+      <td><strong>iOS</strong></td>
+      <td>FoXray</td>
+      <td>App Store</td>
+    </tr>
+    <tr>
+      <td><strong>iOS</strong></td>
+      <td>Shadowrocket</td>
+      <td>App Store (платный)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/XTLS/Xray-core">github.com/XTLS/Xray-core — GUI Clients</a>, <a href="https://hostkey.com/documentation/marketplace/security/3x_ui">hostkey.com — 3X-UI documentation</a></p>
+</blockquote>
+
+<h3 id="62-подключение-общий-алгоритм">6.2 Подключение (общий алгоритм)</h3>
+
+<ol>
+  <li>В панели 3X-UI: <strong>Inbounds</strong> → нажмите иконку QR-кода/ссылки рядом с пользователем</li>
+  <li>Скопируйте конфигурацию (ссылка <code class="language-plaintext highlighter-rouge">vless://...</code>) или QR-код</li>
+  <li>В клиенте: <strong>Импорт из буфера обмена</strong> или <strong>сканирование QR-кода</strong></li>
+  <li>Активируйте подключение</li>
+</ol>
+
+<hr />
+
+<h2 id="7-управление-панелью">7. Управление панелью</h2>
+
+<h3 id="71-меню-управления">7.1 Меню управления</h3>
+
+<p>Вызывается командой:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Выход</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Установить</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Обновить</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Сбросить логин/пароль</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Сбросить Web Base Path</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Сбросить все настройки</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Сменить порт панели</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Просмотреть текущие настройки</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Запустить</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Остановить</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Перезапустить</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Статус</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Автозапуск</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Управление SSL-сертификатами</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>SSL через Cloudflare</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Управление IP-лимитами</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Управление firewall</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Включить BBR</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>Обновить Geo-файлы</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://lahello.com/archives/3x-ui-installation-tutorial-and-node-management-user-guide">lahello.com — 3x-ui management menu</a></p>
+</blockquote>
+
+<h3 id="72-просмотр-текущих-настроек">7.2 Просмотр текущих настроек</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui settings
+</code></pre></div></div>
+
+<p>Или через меню: пункт <strong>10</strong>.</p>
+
+<h3 id="73-резервное-копирование">7.3 Резервное копирование</h3>
+
+<ul>
+  <li><strong>База данных:</strong> <code class="language-plaintext highlighter-rouge">/etc/x-ui/x-ui.db</code></li>
+  <li><strong>Конфигурация Xray:</strong> <code class="language-plaintext highlighter-rouge">/usr/local/x-ui/bin/config.json</code></li>
+</ul>
+
+<p>В панели: <strong>Panel Settings</strong> → <strong>Export Database</strong> / <strong>Import Database</strong></p>
+
+<p><strong>Рекомендуется:</strong> еженедельный бэкup на внешний носитель.</p>
+
+<hr />
+
+<h2 id="8-обновление">8. Обновление</h2>
+
+<h3 id="81-стандартное-обновление">8.1 Стандартное обновление</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash &lt;<span class="o">(</span>curl <span class="nt">-Ls</span> https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Или через меню:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-ui
+<span class="c"># Выбрать пункт 2 — Update</span>
+</code></pre></div></div>
+
+<h3 id="82-через-docker">8.2 Через Docker</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>3x-ui
+docker compose down
+docker compose pull 3x-ui
+docker compose up <span class="nt">-d</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui — Install &amp; Upgrade</a>, <a href="https://wiki.senko.digital/vpn/3x-ui">wiki.senko.digital — Updating</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="9-удаление">9. Удаление</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Остановить и отключить сервис</span>
+systemctl stop x-ui
+systemctl disable x-ui
+
+<span class="c"># Удалить файлы</span>
+<span class="nb">rm</span> <span class="nt">-rf</span> /usr/local/x-ui/
+<span class="nb">rm</span> <span class="nt">-rf</span> /usr/bin/x-ui
+<span class="nb">rm</span> <span class="nt">-f</span> /etc/systemd/system/x-ui.service
+
+<span class="c"># Перечитать systemd</span>
+systemctl daemon-reload
+</code></pre></div></div>
+
+<blockquote>
+  <p>📌 Источник: <a href="https://lahello.com/archives/3x-ui-installation-tutorial-and-node-management-user-guide">lahello.com — Uninstalling</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="10-чек-лист-безопасности">10. Чек-лист безопасности</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Пункт</th>
+      <th>Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SSH: вход только по ключу, пароль отключён</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>SSH: вход по root запрещён</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>SSH: нестандартный порт</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>3X-UI: логин/пароль сменены с дефолтных</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>3X-UI: нестандартный порт панели (41000–65000)</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>3X-UI: длинный случайный Web Base Path</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>3X-UI: доступ только по HTTPS</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>Firewall: открыты только нужные порты</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>Fail2Ban: установлен и настроен</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>BBR: включён</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>Система: автообновление безопасности</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>Бэкапы: настроены еженедельно</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>Xray-core и 3X-UI: обновлены до последних версий</td>
+      <td>☐</td>
+    </tr>
+    <tr>
+      <td>VPN-протокол: VLESS + Reality (рекомендуется)</td>
+      <td>☐</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="ссылки-на-источники">Ссылки на источники</h2>
+
+<ol>
+  <li><strong>Официальный репозиторий 3X-UI:</strong> <a href="https://github.com/MHSanaei/3x-ui">github.com/MHSanaei/3x-ui</a></li>
+  <li><strong>Официальная Wiki 3X-UI:</strong> <a href="https://github.com/MHSanaei/3x-ui/wiki">github.com/MHSanaei/3x-ui/wiki</a></li>
+  <li><strong>Официальный сайт Xray-core:</strong> <a href="https://github.com/XTLS/Xray-core">github.com/XTLS/Xray-core</a> — список GUI-клиентов</li>
+  <li><strong>Senko Digital Wiki — инструкция:</strong> <a href="https://wiki.senko.digital/vpn/3x-ui">wiki.senko.digital/vpn/3x-ui</a></li>
+  <li><strong>EDIS Global Docs — установка на Ubuntu:</strong> <a href="https://docs.edisglobal.com/advanced-setup-guides/install-3x-ui-on-vps/install-3x-ui-on-ubuntu-2204">docs.edisglobal.com</a></li>
+  <li><strong>is*hosting — руководство:</strong> <a href="https://blog.ishosting.com/en/3x-ui-vpn-guide">blog.ishosting.com/en/3x-ui-vpn-guide</a></li>
+  <li><strong>3X-UI System Requirements:</strong> <a href="https://3x-ui.com/what-are-3x-ui-system-requirements/">3x-ui.com/system-requirements</a></li>
+  <li><strong>3X-UI Deep Dive — Security:</strong> <a href="https://elevenlabsmagazine.com/3x-ui-deep-dive-secure-xray-server-management/">elevenlabsmagazine.com</a></li>
+  <li><strong>HOTKEY — документация и клиенты:</strong> <a href="https://hostkey.com/documentation/marketplace/security/3x_ui">hostkey.com/documentation/marketplace/security/3x_ui</a></li>
+  <li><strong>Сравнение протоколов 2026:</strong> <a href="https://vpn07.com/en/blog/2026-shadowrocket-protocols-vless-vmess-trojan-shadowsocks-comparison.html">vpn07.com</a></li>
+  <li><strong>VLESS vs VMess vs Trojan:</strong> <a href="https://www.zhuquejiasu.com/en/blog/v2ray-trojan-vless-vmess-protocol-comparison-pros-cons-and-use-cases">zhuquejiasu.com</a></li>
+  <li><strong>VLESS — Wikipedia:</strong> <a href="https://grokipedia.com/page/VLESS">grokipedia.com/page/VLESS</a></li>
+  <li><strong>Docker + VLESS-REALITY:</strong> <a href="https://semenov.work/posts/3x-ui-vless-reality-vpn/">semenov.work</a></li>
+</ol>
+
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

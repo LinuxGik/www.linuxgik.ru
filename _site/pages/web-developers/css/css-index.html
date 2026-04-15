@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <a href="/"><span class="linuxgik"></span></a>
+                    <a href="/web-dev" class="web-dev">Веб-разработка</a>
+                    <span class="">CSS</span>
+                
+            </p>
+        </li>
+        
+            
+        <li><a href="/pages/web-developers/css/fonts.html">Шрифты</a></li>
+            
+            
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <a href="/">Главная</a> &gt;
+            <a href="/web-dev">Веб-разработка</a> &gt;
+            <span style="color: #73b101">CSS</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <section>
+    <p>
+        CSS - каскадные таблице стилей. Три наиболее важные составляющие CSS: <span class="attention">Каскадность</span>,
+        <span class="attention">Относительные единицы</span>, <span class="attention">Блочная модель.</span>
+    </p>
+    <article class="article-box">
+        <h2>Каскадность</h2>
+        <p>
+            CSS - это объявленные правила. Если к одному и тому же элементу применяется несколько css-правил,
+            это может привести к <b>конфликту объявлений</b>. Браузер следует конкретному набору правил и выберет
+            одно из нескольких примененных к элементу css-правил. <strong><i>Каскадность</i> - так называется этот
+            набор браузерных-правил</strong>. Каскадность определяет <b>способы разрешения конфликтов объявлений</b>
+        </p>
+        <p>Когда объявления конфликтуют, для устранения проблемы нужно учесть три показателя.
+        <ol>
+            <li>
+                <i>Источник стилей</i> - место их расположения. Пользовательские стили накладываются на стили браузера,
+                применяемые по умолчанию.
+            </li>
+            <li><i>Специфичность селекторов</i> - то, какие селекторы имеют приоритет над другими.</li>
+            <li><i>Исходный порядок</i> - порядок, в котором стили(правила) объявляются в таблице стилей</li>
+        </ol>
+        </p>
+        <!-- подраздел "Немного терминологии, оформить как вставку, чтобы он мешал прочтению статьи" -->
+        <section class="notes">
+            <h3>Немного терминологии</h3>
+            <article>
+                <h4>Объявление</h4>
+                <p><strong>Объявление</strong>:  <code>color: black;</code></p>
+                <p>Объявление состоит из <i>свойства</i> (color) и <i>значения</i> (black)</p>
+            </article>
+            <article>
+                <h4>Блок объявлений</h4>
+                <p>Группа объявлений внутри фигурных скобок назвается <strong>блоком объявлений</strong>.</p>
+                <p><i>Блоку объявлений</i> предшествует <strong>селектор</strong> (в данном примере <i>body):</i></p>
+                <code>
+                    body {<br>
+                    color: black;</br>
+                    font-family: Helvetica;<br>
+                    {<br>
+                </code>
+            </article>
+            <article>
+                <h4>Набор правил</h4>
+                <p>В совокупности <i>селектор</i> и <i>блок объявлений</i> назваються - <strong>набор правил</strong>.</p>
+            </article>
+            <article>
+                <h4>@правила</h4>
+                <p>Языковые конструкции начинающиеся с символа @, такие как запросы @import или @media.</p>
+            </article>
+        </section>
+        <!-- Закончен -->
+        <article>
+            <h3>Источники стилей</h3>
+            <p>Стили перечислены в порядке возрастания приоритета. Самый маельнкий приоритет у браузерных, самый большой у важных авторских.</p>
+            <dl>
+                <dt><b>Браузерные</b> стили</dt>
+                <dd>Стили браузера по умолчанию.</dd>
+                <dt><b>Авторские</b> стили</dt>
+                <dd>Созданные вами таблицы стилей.</dd>
+                <dt><b>Важные авторские</b> стили</dt>
+                <dd>Объявление может может быть помечено как важное с помощью слова <b>!important</b>. Пример: <code>color: red !important;</code></dd>
+            </dl>
+        </article>
+        <article>
+            <h4>Специфичность селекторов</h4>
+            <p>Браузер оцнивает специфичность в два этапа:
+            <ul>
+                <li>Сначало проверяет стили, <b>встроенные</b> в html-код (их еще называют <i>строчными стилями</i>).</li>
+                <li>Затем стили, применяемы с помощью селекторов.</li>
+            </ul>
+            </p>
+            <article>
+                <h5>Встроенные стили</h5>
+                <p>
+                    Для задания стилей конкретного элемента-html в кодt-html используется атрибут <b>style</b> :
+                    <code>&lt;h1 style="background-color: red;"&gt;Ваш заголовок&lt;/h1&gt;</code>
+                </p>
+                <p>Это объявления с ограниченной областью действия, которые <b>переопределяют любые объявления задаваемые в авторской таблице.</b></p>
+            </article>
+            <article>
+                <h5>Специфичность селекторов</h5>
+                <p>Правила специфичности:
+                <ul>
+                    <li>
+                        Наиболее специфичный селектор с <b>идентификтором</b> (<i>пример идентификатора:</i> <code>#page-tietle {</code> ).
+                        Чем больше идентификаторов, тем специфичней будет селектор.
+                    </li>
+                    <li>
+                        Селектор с <b>классом</b> (<i>пример класса</i> : <code>.name {</code> ), менее специфичней идентификтора.
+                        Чем больше классов, тем специфичней будет селектор.
+                    </li>
+                    <li>
+                        Селектор с <b>тегами</b> (<i>пример селктора с тегом</i> : <code>h1 {</code> ), мене специфичней класса.
+                        Чем больше тегов, тем специфичней селектор.
+                    </li>
+                </ul>
+                </p>
+            </article>
+
+        </article>
+    </article>
+
+</section>
+</section>
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

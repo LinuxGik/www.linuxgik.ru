@@ -1,0 +1,63 @@
+<!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                {% if current_subsection %}
+                    <a href="/"><span class="linuxgik"></span></a>
+                    <a href="{{ current_section.link }}" class="{{ current_section.brand }}">{{ current_section.name }}</a>
+                    <span class="{{ current_subsection.brand }}">{{ current_subsection.name }}</span>
+                {% elsif current_section %}
+                    <a href="/"><span class="linuxgik"></span></a>
+                    <span class="{{ current_section.brand }}">{{ current_section.name }}</span>
+                {% else %}
+                    <span class="linuxgik"></span>
+                {% endif %}
+            </p>
+        </li>
+        {% if current_subsection %}
+            {% for item in current_subsection.subsubsection %}
+        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+            {% endfor %}
+            {% elsif current_section %}
+                {% for item in current_section.subsection %}
+        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for item in site.data.navigation.nav %}
+        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                {% endfor %}
+        {% endif %}
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        {% if current_subsection %}
+            <a href="/">Главная</a> &gt;
+            <a href="{{ current_section.link }}">{{ current_section.name }}</a> &gt;
+            <span style="color: #73b101">{{ current_subsection.name }}</span>
+        {% elsif current_section %}
+            <a href="/">Главная</a> &gt;
+            <span style="color: #73b101">{{ current_section.name }}</span>
+        {% else %}
+            <span>Вы находитесь на главной странице портала.</span>
+        {% endif %}
+    </div>
+</div>

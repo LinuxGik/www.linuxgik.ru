@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik  - Блог </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <a href="/"><span class="linuxgik"></span></a>
+                    <span class="">Блог</span>
+                
+            </p>
+        </li>
+        
+                
+            
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <a href="/">Главная</a> &gt;
+            <span style="color: #73b101">Блог</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <h1>Блог</h1>
+
+  <article class="article-box">
+    <h2><a href="/2026/04/05/hello.html">Первый пост </a></h2>
+    <time>05.04.2026</time>
+    <p></p>
+  </article>
+
+
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

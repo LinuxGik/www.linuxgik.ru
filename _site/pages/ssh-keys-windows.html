@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik  - ssh-keys-windows </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <span class="linuxgik"></span>
+                
+            </p>
+        </li>
+        
+                
+        <li><a href="/web-dev">Веб-разработка</a></li>
+                
+        <li><a href="/pages/blog">Блог</a></li>
+                
+        <li><a href="/pages/theme/index_theme.html">Тема LinuxGIk</a></li>
+                
+        
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <span>Вы находитесь на главной странице портала.</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <ul>
+    <li>
+        <a href="https://learn.microsoft.com/ru-ru/windows/terminal/tutorials/ssh">
+            Microsoft Learn. "Руководство по SSH в Терминал Windows"
+        </a>
+    </li>
+    <li>
+        <a href="https://learn.microsoft.com/ru-ru/windows-server/administration/openssh/openssh_install_firstuse">
+            Microsoft Learn. "Начало работы с OpenSSH для Windows"
+        </a>
+    </li>
+</ul>
+<p>
+    В Windows 11 присутствует встроенный <i>сервер и клиент SSH</i>, основанный на OpenSSH. По умолчанию клиент OpenSSH
+    уже установлен и находятся в каталоге: C:\Windows\System32\OpenSSH. Также можно это увидеть через "Параметры"
+    (<kbd>Win</kbd> + <kbd>i</kbd>) - "Система" - "Дополнительные компоненты"; и там же в "Дополнительные компоненты"
+    - "Добавление дополнительного компонента", можно установить сервер OpenSSH.
+</p>
+<article class="article-box">
+    <header>
+        <h2>Настройки ключей-ssh в системе Windows 11</h2>
+    </header>
+        <p>Ключи-ssh в Windows 11, лежат в каталоге <span class="path">C:\Users\You_user\.ssh\</span> </p>
+        <h3>Если у вас уже есть ключи-ssh</h3>
+            <p>
+                Если у вас уже есть ключи, тогда просто поместите их в каталог <span class="path">C:\Users\You_user\.ssh\</span>. Если каталога нет,
+                просто создайте его обычным образом.
+            </p>
+        <h3>Создаём новый ключ-ssh в Windows 11</h3>
+            <ul>
+                <li>ssh-keygen - для создания  ключей</li>
+                <li>ssh-agent и ssh-add - для защищенного хранения закрытых ключей</li>
+                <li>scp и sftp - для защищенного копирования файлов открытого ключа при первом использовании сервера</li>
+            </ul>
+
+
+
+            <p>Открываем Powershell:</p>
+            <p><code class="text-code-box" >ssh-keygen -t ed25519</code></p>
+            <p>Команда создаст пару-ключей и поместит их в домашней директории: C:\Users\You_user\.ssh\</p>
+            <p>Включаем ssh-agent - для хранения закрытого ключа и добавляем .</p>
+        <pre><code># По умолчанию служба ssh-agent отключена. Настройте ее на автоматический запуск.
+# Убедитесь, что вы работаете как администратор.
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Запустите службу
+Start-Service ssh-agent
+
+# Это должно вернуть статус Running
+Get-Service ssh-agent
+
+# Закрываем терминал администратора и открываем того юзера, ключи которого надо добавить. Т.е. после того как служба
+ssh-agent запущена, любой пользователь на хосте может добавлять туда свои ключи.
+# Теперь загрузите файлы ключей в ssh-agent.
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
+        </code></pre>
+        <p>Закрытый ключ нельзя получить из агента, если использовался надежный алгоритм, например Ed25519.</p>
+        <p>
+            Сразу копируем пару ключей на флешку, и после того как закрытый ключ добавлен в ssh-agent, удаляем его
+            с локального диска. Если вы утратите доступ к закрытому ключу, вам нужно будет создать новую пару ключей
+            и обновить открытый ключ во всех системах, с которыми вы работаете.
+        </p>
+        <p>Если у вас уже есть ключи, тогда просто поместите их в каталог C:\Users\You_user\.ssh\</p>
+        <p>Добавляем открытый ключ на удаленный сервер к которому будем коннектиться по ssh, в файл ~/.ssh/authorized_keys</p>
+        <p><code>chmod 700 ~/.ssh ; chmod 600 ~/.ssh/authorized_keys</code></p>
+</article>
+
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

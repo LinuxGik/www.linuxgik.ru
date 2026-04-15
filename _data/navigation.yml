@@ -1,2 +1,33 @@
+sidebar_default: sidebar-L/sidebar-L-default.html
+
+nav:
 - name: Веб-разработка
-  link: /web-developers/
+  link: /web-dev
+  brand: web-dev
+  h1: Веб-разработка
+  embedding-h1: embedding_h1/wed-devel-header.html
+  subsection:
+    - name: CSS
+      link: /pages/web-developers/css/css-index.html
+      h1: CSS
+      subsubsection:
+        - name: Шрифты
+          link: /pages/web-developers/css/fonts.html
+          h1: Шрифты в CSS
+    - name: Jekyll
+      link: /pages/web-developers/jekyll/jekyll-index.html
+      h1: Jekyll
+      sidebar_path: sidebar-L/sidebar_L_webdev_jekky.html
+
+- name: Блог
+  link: /pages/blog
+
+- name: Тема LinuxGIk
+  link: /pages/theme/index_theme.html
+  brand: theme-dev
+  h1: Руководство по теме LinuxGIk
+  sidebar_path: sidebar-L/sidebar-L-default.html
+  subsection:
+    - name: Логика навигации
+      link: /pages/theme/navigation_logic.html
+      h1: Логика навигации на портале

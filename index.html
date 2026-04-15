@@ -2,8 +2,6 @@
 layout: default
 title: Главная
 h1: Справочный портал в мире информационных технологий
-sidebar-path: sidebar-L/sidebar-L-default.html
-index: home
 ---
 
 <article class="article-box"> <!--rsync-->
@@ -100,12 +98,15 @@ index: home
         <h2 class="grid-article-h2">Инструкция по настройке сервера</h2><span class="type-h2-header type-briefly"> </span>
     </header>
 
+    <h3>1. Настройка записей DNS</h3>
+    <p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
+
     <h3>1. Создаем пользователя с правами sudo</h3>
         <ul>
             <li>
                 <code class="path">
                     <span class="root"></span>]<span style="color: royalblue">#</span> useradd <i>new_username</i>
-                </code> - добавляем пользователя.
+                </code> - добавляем пользователя. (для Debian <code>adduser</code>)
             </li>
             <li>
                 <code class="path">
@@ -116,58 +117,104 @@ index: home
                 <code class="path">
                     <span class="root"></span>]<span style="color: royalblue">#</span> usermod -aG
                     <i>group_name1 group_name2... user_name</i>
-                </code> - добавляем пользователя в группу <b>wheel</b>.
+                </code> - добавляем пользователя в группу <b>wheel</b>. (В Debian: установить <code>apt install sudo</code>. Добавить в группу <b>sudo</b>)
             </li>
         </ul>
         <p>Выходим из сессии root и заходим под новым пользователем.</p>
         <hr class="custom-hr" />
 
+
+
     <h3>2. Настройка SSH</h3>
-        <p class="note">
-            Примечание. Для настройки ключей-SSH в Windows 11, читай: <a href="pages/ssh-keys-windows.html">Настройки
-            ключей-ssh в системе Windows</a>
-        </p>
+    <p class="note">
+        Внимание. Для генерации ключей-SSH в Windows 11, смотрите: <a href="pages/ssh-keys-windows.html">Генерация
+        ключей-ssh в терминале Windows</a>
+    </p>
+
+    <!-- ===== 2.1 ===== -->
+    <h4>2.1 Генерация ключа и копирование открытого ключа на сервер</h4>
+    <ul>
+        <li><code class="path"><span class="user">]</span> ssh-keygen</code> — создаём пару ключей на станции.</li>
+        <li>
+            <code class="path"><span class="user">]</span> ssh-copy-id user@host</code>
+            — отправляем публичный ключ на удалённый сервер.
+        </li>
+    </ul>
+
+    <!-- ===== 2.2 ===== -->
+    <h4>2.2 Настройка файла <span class="path">/etc/ssh/sshd_config</span></h4>
+    <ul>
+        <li>Отключить авторизацию по паролю — <b>PasswordAuthentication no</b></li>
+        <li>Запретить вход по root — <b>PermitRootLogin no</b></li>
+        <li>Сменить порт — <b>Port #порт</b></li>
+    </ul>
+    <p class="note">
+        ⚠️ Для того чтобы изменения вступили в силу, необходимо перезагрузить SSH-сервер. Команда перезагрузки приведена в пункте 2.5 — её следует выполнять только после завершения всех предыдущих настроек. Если применить перезагрузку до открытия нового порта в firewall и MAC, вы потеряете доступ к серверу.
+    </p>
+
+    <!-- ===== 2.3 ===== -->
+    <h4>2.3 Разрешить системе обязательного доступа (SELinux / AppArmor) использовать нестандартный порт</h4>
+    <p>
+        SELinux (CentOS/RHEL) и AppArmor (Debian/Ubuntu) — системы обязательного контроля доступа (MAC — Mandatory Access Control). Они ограничивают процессы, в том числе могут блокировать использование нестандартных портов.
+    </p>
+
+    <figure>
+        <figcaption>CentOS / RHEL (SELinux)</figcaption>
         <ul>
-            <li><code class="path"><span class="user">]</span> ssh-keygen</code> - на клиенте генерируем пару ключей.</li>
-            <li>
-                <code class="path"><span class="user">]</span> ssh-copy-id user@host</code>
-                - копируем открытый ключ на удаленный сервер.
-            </li>
-            <li>
-                <figure>
-                    <figcaption>Открываем файл <span class="path">etc/ssh/sshd_config</span></figcaption>
-                    <ul>
-                        <li>Отключаем аутентификацию по паролю - <b>PasswordAuthentication no</b></li>
-                        <li>Запрещаем логиниться от root - <b>PermitRootLogin no</b></li>
-                        <li>Меняем порт - <b>Port #номер</b></li>
-                        <li>Перезагружаем сервер <code class="path"><span class="root">]</span> systemct reload sshd</code></li>
-                    </ul>
-                </figure>
-            <li>
-            <li>
-                <figure>
-                    <figcaption>Далее нужно обновить политику SeLinux, чтобы разрешить использование этого порта</figcaption>
-                    <ul>
-                        <li>Проверить включен ли SeLinux <code class="path"><span class="user">]</span>sestatus</code>.</li>
-                        <li><code class="path"><span class="root">]</span> yum install policycoreutils-python-utils</code></li>
-                        <li><code class="path"><span class="root">]</span> semanage port -a -t ssh_port_t -p tcp #номер</code></li>
-                    </ul>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <figcaption>Открываем порт в firewall</figcaption>
-                <ul>
-                    <li><code class="path"><span class="root">]</span> firewall-cmd --add-port #номер/tcp</code></li>
-                    <li><code class="path"><span class="root">]</span> firewall-cmd --runtime-to-permanent</code></li>
-                    <li><code class="path"><span class="root">]</span> semanage port -l | grep ssh</code></li>
-                </ul>
-                </figure>
-            </li>
+            <li>Проверить статус SELinux — <code class="path"><span class="user">]</span> sestatus</code></li>
+            <li>Установить утилиты управления — <code class="path"><span class="root">]</span> yum install policycoreutils-python-utils</code></li>
+            <li>Разрешить нестандартный порт — <code class="path"><span class="root">]</span> semanage port -a -t ssh_port_t -p tcp #порт</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> semanage port -l | grep ssh</code></li>
         </ul>
-        <p>Начальная настройка SSH завершена.</p>
+    </figure>
+
+    <figure>
+        <figcaption>Debian / Ubuntu (AppArmor)</figcaption>
+        <p>AppArmor по умолчанию не ограничивает привязку sshd к нестандартным портам — дополнительных действий не требуется.</p>
+    </figure>
+
+    <!-- ===== 2.4 ===== -->
+    <h4>2.4 Открытие порта в межсетевом экране (firewall)</h4>
+
+    <figure>
+        <figcaption>CentOS / RHEL (firewalld)</figcaption>
+        <ul>
+            <li><code class="path"><span class="root">]</span> firewall-cmd --add-port=#порт/tcp</code></li>
+            <li><code class="path"><span class="root">]</span> firewall-cmd --runtime-to-permanent</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> firewall-cmd --list-ports</code></li>
+        </ul>
+    </figure>
+
+    <figure>
+        <figcaption>Debian / Ubuntu (UFW)</figcaption>
+        <ul>
+            <li>Установить UFW (если нет) — <code class="path"><span class="root">]</span> apt install ufw</code></li>
+            <li>Открыть новый порт — <code class="path"><span class="root">]</span> ufw allow #порт/tcp</code></li>
+            <li>Удалить старый (если был 22) — <code class="path"><span class="root">]</span> ufw delete allow 22/tcp</code></li>
+            <li>Включить firewall — <code class="path"><span class="root">]</span> ufw enable</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> ufw status</code></li>
+        </ul>
+    </figure>
+
+    <!-- ===== 2.5 ===== -->
+    <h4>2.5 Применение конфигурации и проверка</h4>
+    <ul>
+        <li>
+            Перезагрузить конфигурацию SSH-сервера
+            <code class="path"><span class="root">]</span> systemctl reload sshd</code>
+        </li>
+        <li>
+            Подключиться по новому порту
+            <code class="path"><span class="user">]</span> ssh -p #порт user@host</code>
+        </li>
+    </ul>
+    <p class="note">
+        💡 Не закрывайте текущую SSH-сессию, пока не убедитесь, что подключение по новому порту работает. Если что-то пойдёт не так, вы сможете исправить ошибку в открытой сессии.
+    </p>
+
+    <p>Базовая настройка SSH завершена.</p>
     <hr class="custom-hr" />
-        <!-- Закрытие h3 Настройка SSH -->
+<!-- Закрытие h3 Настройка SSH -->
         <h3>3. Установка и запуск web-сервера</h3><!--Установка web-сервера -->
             <ul>
                 <li> <a href="https://httpd.apache.org/">Перейти на официальный сайт apache.org</a></li>
@@ -207,6 +254,4 @@ index: home
 
             <p>Готово. После этого, технически уже можно начать пользоваться сервером. Вводите в браузере ip-адрес или доменное имя и проверяйте.</p>
             <hr class="custom-hr" />
-        <h3>4. Настройка записей DNS</h3>
-            <p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
 </article>

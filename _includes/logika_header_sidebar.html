@@ -1,0 +1,22 @@
+<!-- определяем текущий раздел и подраздел по URL -->
+{% for item in site.data.navigation.nav %}
+    {% if page.url contains item.link %}
+        {% assign current_section = item %}
+        {% if item.subsection %}
+            {% for sub in item.subsection %}
+                {% if page.url contains sub.link %}
+                    {% assign current_subsection = sub %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+{% if current_subsection.sidebar_path %}
+    {% assign sidebar = current_subsection.sidebar_path %}
+{% elsif current_section.sidebar_path %}
+    {% assign sidebar = current_section.sidebar_path %}
+{% else %}
+    {% assign sidebar = site.data.navigation.sidebar_default %}
+{% endif %}

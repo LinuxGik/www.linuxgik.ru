@@ -1,0 +1,76 @@
+---
+layout: default
+title: "Логика навигации: LinuxGIk"
+h1: "Логика навигации: LinuxGIk"
+---
+
+<article class="article-box">
+    <header class="article-header">
+        <h2>Как работает меню на портале</h2>
+    </header>
+    <p>
+        Навигация на портале <strong>LinuxGIk</strong> динамическая и управляется через два основных файла в каталоге <code>_includes/</code> и YAML-данные в <code>_data/navigation.yml</code>.
+    </p>
+
+    <hr class="custom-hr" />
+
+    <h3>1. Точка входа (Layout)</h3>
+    <p>
+        Вся логика начинается в главном шаблоне сайта. Именно здесь подключаются скрипты, отвечающие за расчет разделов и отрисовку меню.
+    </p>
+
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid royalblue; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: royalblue; font-weight: bold;">Файл: _layouts/default.html</span>
+        <pre style="margin-top: 10px; color: #d0c6c6;"><code>{% raw %}&lt;body class="grid-container"&gt;
+
+    {% include logika_header_sidebar.html %}
+
+    &lt;header class="site-header"&gt;
+        {% include header_nav.html %}
+    &lt;/header&gt;
+...{% endraw %}</code></pre>
+    </div>
+
+    <hr class="custom-hr" />
+
+    <h3>2. Определение текущего раздела (logika_header_sidebar.html)</h3>
+    <p>Этот файл инклудится первым в <code>default.html</code>. Его задача — "понять", где сейчас находится пользователь, сравнив текущий URL страницы со списком разделов в <code>navigation.yml</code>.</p>
+    
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid royalblue; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: royalblue; font-weight: bold;">Файл: _includes/logika_header_sidebar.html</span>
+        <pre style="margin-top: 10px; color: #b1a0a0;"><code>{% raw %}{% for item in site.data.navigation.nav %}
+    {% if page.url contains item.link %}
+        {% assign current_section = item %}
+...{% endraw %}</code></pre>
+    </div>
+
+    <p><strong>Суть процесса:</strong></p>
+    <ul>
+        <li>Он берет список всех разделов из <code>site.data.navigation.nav</code>.</li>
+        <li>Если в URL страницы содержится ссылка на раздел, то раздел помечается как <code>current_section</code>.</li>
+        <li>Если внутри раздела есть подразделы (subsection), он ищет совпадение в них и помечает <code>current_subsection</code>.</li>
+    </ul>
+
+    <hr class="custom-hr" />
+
+    <h3>3. Вывод элементов в меню (header_nav.html)</h3>
+    <p>Этот файл отвечает за визуальное отображение. В нем используется цикл <code>for</code>, который рисует ссылки в шапке сайта.</p>
+
+    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid #73b101; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
+        <span style="color: #73b101; font-weight: bold;">Файл: _includes/header_nav.html</span>
+        <pre style="margin-top: 10px; color: #c3b4b4;"><code>{% raw %}{% else %}
+    {% for item in site.data.navigation.nav %}
+        &lt;li&gt;&lt;a href="{{ item.link }}"&gt;{{ item.name }}&lt;/a&gt;&lt;/li&gt;
+    {% endfor %}
+{% endif %}{% endraw %}</code></pre>
+    </div>
+
+    <p>На данный момент этот код берет <strong>абсолютно все</strong> элементы из навигации и выводит их в шапку.</p>
+
+    <hr class="custom-hr" />
+
+    <h3>4. Зачем нам нужен "hidden"?</h3>
+    <p>Именно здесь мы планируем внести изменения. Нам нужно добавить проверку: если у элемента в <code>navigation.yml</code> стоит метка <code>hidden: true</code>, то цикл в <code>header_nav.html</code> должен его пропустить.</p>
+    
+    <p>При этом <code>logika_header_sidebar.html</code> всё равно "увидит" этот раздел, и у нас будут правильно работать хлебные крошки и сайдбары.</p>
+</article>

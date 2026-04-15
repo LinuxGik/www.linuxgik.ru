@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik  - Jekyll: Руководство </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <a href="/"><span class="linuxgik"></span></a>
+                    <a href="/web-dev" class="web-dev">Веб-разработка</a>
+                    <span class="">Jekyll</span>
+                
+            </p>
+        </li>
+        
+            
+            
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <a href="/">Главная</a> &gt;
+            <a href="/web-dev">Веб-разработка</a> &gt;
+            <span style="color: #73b101">Jekyll</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <article class="article-box">
+    <header class="article-header">
+        <h2>Основы Jekyll</h2>
+    </header>
+    <p>
+        В этом подразделе собраны материалы по работе с генератором статических сайтов Jekyll, который является основой портала <strong>LinuxGIk</strong>.
+    </p>
+</article>
+
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        <div class="sidebar-L">
+    <h2>Знать</h2>
+    <div class="revert-h3">
+        <img src="/assets/images/TomPreston.svg" alt="фото Тома Престона, который создал генератор статических сайтов Jekyll"
+        title="Том Престон. Создал генератор статических сайтов Jekyll">
+        <h3 style="margin-top: 4px;">Вывод кода Liquid</h3>
+    </div>
+    <div class="block-know">
+        <p><code>&#123;% raw %&#125;</code></p>
+        <p><code>&#123;% endraw %&#125;</code> чтобы избежать ошибок парсинга.
+    </div>
+</div>
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

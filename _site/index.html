@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/grid-layout.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+<!--    <link rel="stylesheet" href="/assets/css/main.css">-->
+    <title>LinuxGik  - Главная </title>
+</head>
+    <body class="grid-container">
+
+        <!-- определяем текущий раздел и подраздел по URL -->
+
+
+<!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
+
+
+        <header class="site-header">
+            <!-- Первый блок шапки - главная навигация -->
+<nav>
+    <ul class="site-nav">
+        <li class="brand-button">
+            <p>
+                
+                    <span class="linuxgik"></span>
+                
+            </p>
+        </li>
+        
+                
+        <li><a href="/web-dev">Веб-разработка</a></li>
+                
+        <li><a href="/pages/blog">Блог</a></li>
+                
+        <li><a href="/pages/theme/index_theme.html">Тема LinuxGIk</a></li>
+                
+        
+    </ul>
+</nav>
+<!-- Конец первого блока шапки (headers) -->
+
+<!-- Второй блок шапки (header)  -->
+<!-- Расположен внизу сразу под первым блоком.
+Второй блок разделен на два блока - левый и правый.
+В первом блоке (левом) - Breadcrumbs ->-> под ним ->-> h1 ->-> под ним ->-> embeding-header.
+Второй блок (правый) - Section-menu (меню раздела)
+ --------------------------------------------------------------------------------------------
+ |                                      |                                                   |
+ | breadcrumbs                          |                                                   |
+ |                                      | section-menu                                      |
+ | h1                                   |                                                   |
+ | page.embedding-header.               |                                                   |
+ |                                      |                                                   |
+ --------------------------------------------------------------------------------------------
+-->
+<div class="level-two-header-left">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        
+            <span>Вы находитесь на главной странице портала.</span>
+        
+    </div>
+</div>
+
+        </header>
+
+        <main class="main">
+            <article class="article-box"> <!--rsync-->
+    <!-- Todo: в каталоге under_revision/ (доработка), страница rsync.html - там побольше материала, совсем чуть-чуть
+    побольше. Надо  будет составить подробную статью -->
+    <header class="article-header"><h2>rsync</h2><span class="type-h2-header type-briefly"> </span></header>
+    <p>
+        Должна быть установлена на всех машинах.
+    </p>
+    <p>
+        В <span class="rsync">rsync</span> всегда, сначала указываем <span class="rsync">источник</span>, а потом
+        <span class="rsync">место назначения</span>, т.е сначала что копируем, а потом куда копируем.<br>
+        Всегда используйте<span class="rsync"> параметр -nv перед прогоном</span>. rsync может натворить огромную
+        головную боль если что-то не так сделать.
+    </p>
+    <hr class="custom-hr" />
+    <h3>Завершающий слеш "/"</h3>
+    <p>
+        Источник<span class="attention"> без завершающего слеша скопирует сам каталог</span>
+        <span class="path">/path/dir</span> в удаленный каталог
+        <span class="path">/dest_dir</span>:<br>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
+            rsync -a /path/dir user@host:dest_dir
+        </code>
+    </p>
+
+    <p>Путь к каталогу источнику <span class="attention">с косой чертой в конце </span>скопирует
+        <span class="attention">не сам каталог</span> <span class="path">/path/dir</span>,
+        а все содержимое в удаленный каталог <span class="path">/dest_dir</span>:<br>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
+            rsync -a /path/dir/ user@host:dest_dir
+        </code>
+    </p>
+    <hr class="custom-hr" />
+<!-- h3 "Завершающий слеш"-->
+    <h3>Небольшая инструкция по синхронизации</h3>
+    <ol class="instruction-list">
+        <li>
+            <p>Синхронизируем локальный каталог с удаленным сервером:<br>
+                <code class="path"><span class="local"></span>]<span style="color: royalblue">$</span>
+                    rsync -a -e "ssh -p 7967" html/ user@host:html/</code>
+            </p>
+            <p class="note">
+                <span>Примечание</span>: <code class="path">-e "ssh -p 7967"</code> указывает коннектиться по определенному порту.
+            </p>
+        </li>
+        <li>
+            <p>
+                На удаленной машине синхронизируем каталоги:<br>
+                <code class="path"><span class="remote"></span>]<span style="color: royalblue">$</span>
+                    rsync -a html/ /var/www/html/
+                </code>
+            </p>
+        </li>
+    </ol>
+    <hr class="custom-hr" />
+    <h3>Исключить каталог из операции переноса</h3>
+    <p>
+        <code class="path"><span class="local"></span>]<span style="color:royalblue;">$</span>
+            rsync -a -e "ssh -p 7967" --exclude 'res/header' html/ user@host:html/
+        </code>
+    </p>
+</article> <!-- закрытие rsync-->
+
+<article class="article-box">
+    <header class="article-header"><h2>Команда scp</h2><span class="type-h2-header type-briefly"> </span></header>    <!-- Команда csp -->
+    <p><dfn>scp</dfn> - копирует файлы между хостами в Сети. Работает подобно команде <i>cp</i></p>
+
+    <p>Примеры:</p>
+    <ul>
+        <li>
+            <p>
+                <b>Файл</b> с удаленного хоста к себе в текущую директорию -
+                <code class="path"><span class="local"></span>]<span style="color:royalblue">$</span>
+                    scp user@host:path_file path_copy_past
+                </code>
+            </p>
+        </li>
+        <li>
+            <p>
+                <b>Каталог</b> с удаленного хоста через <b>другой порт</b> -
+                <code class="path"><span class="local"></span>]<span style="color:royalblue">$</span>
+                    scp -r -P 2871 user@host:path_file path_copy_past
+                </code>
+            </p>
+        </li>
+    </ul>
+    <p class="note-attention">Внимание: для scp порт указывается с большой "P".</p>
+
+</article> <!--закрытие "Команда scp"-->
+
+<article class="article-box">
+    <header class="article-header">
+        <h2 class="grid-article-h2">Инструкция по настройке сервера</h2><span class="type-h2-header type-briefly"> </span>
+    </header>
+
+    <h3>1. Настройка записей DNS</h3>
+    <p>Нужно в <strong>запись А</strong> добавить ip-адрес сервера. Для <b>www.you_name_domain.ru</b> и для <b>you_name_domain.ru</b> </p>
+
+    <h3>1. Создаем пользователя с правами sudo</h3>
+        <ul>
+            <li>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> useradd <i>new_username</i>
+                </code> - добавляем пользователя. (для Debian <code>adduser</code>)
+            </li>
+            <li>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> passwd <i>new_username</i>
+                </code> - задаем ему пароль.
+            </li>
+            <li>
+                <code class="path">
+                    <span class="root"></span>]<span style="color: royalblue">#</span> usermod -aG
+                    <i>group_name1 group_name2... user_name</i>
+                </code> - добавляем пользователя в группу <b>wheel</b>. (В Debian: установить <code>apt install sudo</code>. Добавить в группу <b>sudo</b>)
+            </li>
+        </ul>
+        <p>Выходим из сессии root и заходим под новым пользователем.</p>
+        <hr class="custom-hr" />
+
+
+
+    <h3>2. Настройка SSH</h3>
+    <p class="note">
+        Внимание. Для генерации ключей-SSH в Windows 11, смотрите: <a href="pages/ssh-keys-windows.html">Генерация
+        ключей-ssh в терминале Windows</a>
+    </p>
+
+    <!-- ===== 2.1 ===== -->
+    <h4>2.1 Генерация ключа и копирование открытого ключа на сервер</h4>
+    <ul>
+        <li><code class="path"><span class="user">]</span> ssh-keygen</code> — создаём пару ключей на станции.</li>
+        <li>
+            <code class="path"><span class="user">]</span> ssh-copy-id user@host</code>
+            — отправляем публичный ключ на удалённый сервер.
+        </li>
+    </ul>
+
+    <!-- ===== 2.2 ===== -->
+    <h4>2.2 Настройка файла <span class="path">/etc/ssh/sshd_config</span></h4>
+    <ul>
+        <li>Отключить авторизацию по паролю — <b>PasswordAuthentication no</b></li>
+        <li>Запретить вход по root — <b>PermitRootLogin no</b></li>
+        <li>Сменить порт — <b>Port #порт</b></li>
+    </ul>
+    <p class="note">
+        ⚠️ Для того чтобы изменения вступили в силу, необходимо перезагрузить SSH-сервер. Команда перезагрузки приведена в пункте 2.5 — её следует выполнять только после завершения всех предыдущих настроек. Если применить перезагрузку до открытия нового порта в firewall и MAC, вы потеряете доступ к серверу.
+    </p>
+
+    <!-- ===== 2.3 ===== -->
+    <h4>2.3 Разрешить системе обязательного доступа (SELinux / AppArmor) использовать нестандартный порт</h4>
+    <p>
+        SELinux (CentOS/RHEL) и AppArmor (Debian/Ubuntu) — системы обязательного контроля доступа (MAC — Mandatory Access Control). Они ограничивают процессы, в том числе могут блокировать использование нестандартных портов.
+    </p>
+
+    <figure>
+        <figcaption>CentOS / RHEL (SELinux)</figcaption>
+        <ul>
+            <li>Проверить статус SELinux — <code class="path"><span class="user">]</span> sestatus</code></li>
+            <li>Установить утилиты управления — <code class="path"><span class="root">]</span> yum install policycoreutils-python-utils</code></li>
+            <li>Разрешить нестандартный порт — <code class="path"><span class="root">]</span> semanage port -a -t ssh_port_t -p tcp #порт</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> semanage port -l | grep ssh</code></li>
+        </ul>
+    </figure>
+
+    <figure>
+        <figcaption>Debian / Ubuntu (AppArmor)</figcaption>
+        <p>AppArmor по умолчанию не ограничивает привязку sshd к нестандартным портам — дополнительных действий не требуется.</p>
+    </figure>
+
+    <!-- ===== 2.4 ===== -->
+    <h4>2.4 Открытие порта в межсетевом экране (firewall)</h4>
+
+    <figure>
+        <figcaption>CentOS / RHEL (firewalld)</figcaption>
+        <ul>
+            <li><code class="path"><span class="root">]</span> firewall-cmd --add-port=#порт/tcp</code></li>
+            <li><code class="path"><span class="root">]</span> firewall-cmd --runtime-to-permanent</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> firewall-cmd --list-ports</code></li>
+        </ul>
+    </figure>
+
+    <figure>
+        <figcaption>Debian / Ubuntu (UFW)</figcaption>
+        <ul>
+            <li>Установить UFW (если нет) — <code class="path"><span class="root">]</span> apt install ufw</code></li>
+            <li>Открыть новый порт — <code class="path"><span class="root">]</span> ufw allow #порт/tcp</code></li>
+            <li>Удалить старый (если был 22) — <code class="path"><span class="root">]</span> ufw delete allow 22/tcp</code></li>
+            <li>Включить firewall — <code class="path"><span class="root">]</span> ufw enable</code></li>
+            <li>Проверить — <code class="path"><span class="root">]</span> ufw status</code></li>
+        </ul>
+    </figure>
+
+    <!-- ===== 2.5 ===== -->
+    <h4>2.5 Применение конфигурации и проверка</h4>
+    <ul>
+        <li>
+            Перезагрузить конфигурацию SSH-сервера
+            <code class="path"><span class="root">]</span> systemctl reload sshd</code>
+        </li>
+        <li>
+            Подключиться по новому порту
+            <code class="path"><span class="user">]</span> ssh -p #порт user@host</code>
+        </li>
+    </ul>
+    <p class="note">
+        💡 Не закрывайте текущую SSH-сессию, пока не убедитесь, что подключение по новому порту работает. Если что-то пойдёт не так, вы сможете исправить ошибку в открытой сессии.
+    </p>
+
+    <p>Базовая настройка SSH завершена.</p>
+    <hr class="custom-hr" />
+<!-- Закрытие h3 Настройка SSH -->
+        <h3>3. Установка и запуск web-сервера</h3><!--Установка web-сервера -->
+            <ul>
+                <li> <a href="https://httpd.apache.org/">Перейти на официальный сайт apache.org</a></li>
+                <li> <a href="https://nginx.org/ru/">Перейти на официальный сайт nginx.org</a></li>
+            </ul>
+            <figure>
+                <figcaption>Для запуска веб-сервера нужно:</figcaption>
+                <ol>
+                    <li>Установить веб-сервер
+                    <li>Открыть порт в межсетевом экране
+                    <li>Настроить автоматический запуск для службы <i>httpd</i> или <i>nginx</i>
+                </ol>
+            </figure>
+            <figure><figcaption>Установка веб-сервера</figcaption>
+                    <ul><li><figure><figcaption>Apache</figcaption><ul>
+                                <li><code class="path"><span class="root">]</span> yum install <i>httpd</i></code></li>
+                                <li><code class="path"><span class="root">]</span> systemctl enable httpd --now</code></li>
+                        </ul></figure></li>
+                        <li><figure><figcaption>Nginx</figcaption><ul>
+                            <li><code class="path"><span class="root">]</span> yum install <i>nginx</i></code></li>
+                            <li><code class="path"><span class="root">]</span> systemctl enable nginx --now</code></li>
+                        </ul></figure></li>
+                    </ul></figure>
+            <figure><figcaption>Открываем порт в межсетевом экране</figcaption><ul>
+                <li>
+                    <code class="path">
+                        <span class="root">]</span>firewall-cmd --zone=public --add-service=http --permanent
+                    </code> - добавляем в активную конфигурацию 80-ый порт в виде сервиса http.
+                    <p class="note">
+                        Порт 80 ассоциирован с сервисом http в firewalld. Подробней читай в официальной документации firewalld:
+                        <a href="https://firewalld.org/documentation/howto/open-a-port-or-service.html">Open a Port or Service</a>
+                    </p>
+                </li>
+                <li><code class="path"><span class="root">]</span> firewall-cmd --reload</code></li>
+                <li><code class="path"><span class="root">]</span>firewall-cmd --list-all</code> - проверяем что порт открыт.</li>
+            </ul></figure>
+
+            <p>Готово. После этого, технически уже можно начать пользоваться сервером. Вводите в браузере ip-адрес или доменное имя и проверяйте.</p>
+            <hr class="custom-hr" />
+</article>
+        </main>
+
+
+    <aside class="sidebar-L">
+        
+        
+<div class="sidebar-L">
+    <h2>Знать</h2>
+
+    <div class="revert-h3">
+        <img src="/assets/images/StivenBorn.svg" alt="фото Стивена Борна, который разработал оболочку Bourne shell"
+        title="Стивен Борн. Разработал оболочку Bourne shell">
+        <h3 style="margin-top: 4px;">Ввод и вывод с помощью оболочки</h3>
+    </div>
+
+    <div class="block-know">
+        <p><b>stdin</b>- стандартный ввод</p>
+        <p><b>stdout</b> - стандартный вывод</p>
+        <p><b>stderr</b> - стандартная ошибка</p>
+    </div>
+    <div class="block-know">
+        <p><code>~]$ ls > file.txt</code> - отправит вывод  в file. Создаст file, если file уже есть затрет данные в нем.</p>
+        <p><code>~]$ ls >> file.txt</code> - вывод в файл без затирания</p>
+        <p><code>~]$ set -C</code> - включить параметр оболочки предотварщающий затирание (+С отключить).</p>
+        <p><code>~]$ head /proc/cpuinfo | tr a-z A-Z</code> - отправить стандартный вывод на стандартый вход другой комаде</p>
+        <p><code>~]$ ls /ffffff 2> err.txt</code> - отправить ошибку в файл.</p>
+        <p><code>~]$ ls /ffffff 2>&1 file.txt</code> - направит ошибку туда же куда stdin</p>
+    </div>
+</div>
+
+
+    </aside>
+
+    <footer>
+        <p>
+    <a href="https://jekyllrb.com/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+        <img src="/assets/images/brand-logo/Jekyll-logo-2x.png" alt="Jekyll Logo" style="height: 16px; vertical-align: middle; margin-right: 6px;">
+    </a>Built with Jekyll
+</p>
+<p>&copy; Авторские права защищены. 2026 | <a href="/pages/theme/index_theme.html" style="text-decoration: none; color: #555; font-size: 0.85em;">Тема Jekyll LinuxGIk</a></p>
+
+
+    </footer>
+
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

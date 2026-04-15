@@ -11,8 +11,10 @@
 </head>
     <body class="grid-container">
 
+        {% include logika_header_sidebar.html %}
+
         <header class="site-header">
-            {% include header-nav.html %}
+            {% include header_nav.html %}
         </header>
 
         <main class="main">
@@ -21,7 +23,8 @@
 
 
     <aside class="sidebar-L">
-        {% include {{ page.sidebar-path }} %}
+        {% assign f = sidebar %}
+        {% include {{ f }} %}
     </aside>
 
     <footer>
