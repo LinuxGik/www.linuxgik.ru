@@ -1,0 +1,33 @@
+{% if s2 and s2.s3 %}
+    <div class="level-two-header-right">
+        <figure>
+            <figcaption>
+                {{ s2.name }}
+            </figcaption>
+
+            <nav>
+                <ul class="site-submenu">
+                    {% for item in s2.s3 %}
+                        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </figure>
+    </div>
+{% elsif s1 and s1.s2 %}
+    <div class="level-two-header-right">
+        <figure>
+            <figcaption>
+                {{ s1.name }}
+            </figcaption>
+
+            <nav>
+                <ul class="site-submenu">
+                    {% for item in s1.s2 %}
+                        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </figure>
+    </div>
+{% endif %}

@@ -1,22 +1,36 @@
 <!-- определяем текущий раздел и подраздел по URL -->
-{% for item in site.data.navigation.nav %}
-    {% if page.url contains item.link %}
-        {% assign current_section = item %}
-        {% if item.subsection %}
-            {% for sub in item.subsection %}
-                {% if page.url contains sub.link %}
-                    {% assign current_subsection = sub %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+{% for item in site.data.navigation.nav %} <!-- Проходимся по массиву nav -->
+    {% if page.url == item.link %}          <!-- если открыта страница раздела. В data-файле ключу link присвоен url страницы. -->
+        {% assign s1 = item %}
+    {% endif %}
+
+    {% if item.s2 %}                <!-- если в списке есть второй уровень вложенности -->
+        {% for sub in item.s2 %}    <!-- проходимся по второму уровню вложенности через переменную sub -->
+            {% if page.url == sub.link %}   <!-- если открыта страница подраздела -->
+                {% assign s1 = item %}
+                {% assign s2 = sub %}
+            {% endif %}
+
+            {% if sub.s3 %}      <!-- если есть третий уровень вложенности -->
+                {% for child in sub.s3 %}
+                    {% if page.url == child.link %}
+                        {% assign s1 = item %}
+                        {% assign s2 = sub %}
+                        {% assign s3 = child %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
     {% endif %}
 {% endfor %}
 
 <!-- Определяем sidebar - свой -> из раздела -> дефолтный -->
-{% if current_subsection.sidebar_path %}
-    {% assign sidebar = current_subsection.sidebar_path %}
-{% elsif current_section.sidebar_path %}
-    {% assign sidebar = current_section.sidebar_path %}
-{% else %}
+{% if s2.sidebar_path %}    <!-- если вложенный список 2ур имеет sidebar_path -->
+    {% assign sidebar = s2.sidebar_path %}  <!-- заносим в переменную -->
+{% elsif s1.sidebar_path %}    <!-- иначе, если раздел s1 содержит sidebar_path -->
+    {% assign sidebar = s1.sidebar_path %} <!-- заносим в переменную -->
+{% else %}  <!-- если ни то и не другое, заносим дефолтный sidebar_path в переменную -->
     {% assign sidebar = site.data.navigation.sidebar_default %}
 {% endif %}
+
+<!-- Этот файл инклюдится самый первый в дефолтный лайаут. В итоге у нас есть три переменные.  -->

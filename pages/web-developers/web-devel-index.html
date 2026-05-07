@@ -1,8 +1,176 @@
 ---
 title: Веб-разработка
 permalink: /web-dev
+h1: Веб-разработка
 ---
 
+<!-- №1. Валидация html-кода, CSS, и ссылок в документе -->
 <article class="article-box">
-    <header class="article-header"><h2>Валидация html-кода</h2> <span class="type-h2-header type-full"> </span></header>
+    <header class="article-header">
+        <div>
+            <h2 class="ar-h2">Валидация html-кода, CSS, и ссылок в документе</h2>
+            <span class="embedding-h1">В контексте материала, валидация - пройти проверку на соответствие стандартам.</span>
+        </div>
+        <span class="type-h2-header type-full"> </span>
+    </header>
+
+    <figure><figcaption>Переходы</figcaption><ul>
+        <li><a href="https://www.w3.org/developers/tools/">W3C Validators and tools</a> - валидаторы W3C</li>
+        <li><a href="https://jigsaw.w3.org/css-validator/manual.html">Руководство пользователя сервиса проверки CSS</a></li>
+        <li><a href="https://validator.w3.org/nu/">Nu Html Checker</a> - cервис проверки HTML от W3C.</li>
+        <li><a href="https://jigsaw.w3.org/css-validator/">CSS Validation Service</a> - cервис проверки CSS от W3C.</li>
+        <li><a href="https://validator.w3.org/checklink">Link Checker</a></li>
+        <li><a href="https://www.w3.org/QA/Tools/Icons">Значки о прохождении валидации</a></li>
+    </ul></figure>
+    <p>
+        Валидация нужна для того, чтобы проверить ваш код на ошибки. Это основная причина, для чего нужно проходить
+        проверку. Также проверка на валидность позволит вам увидеть насколько ваш код соответствует спецификации.
+        Более подробно о том зачем нужна проверка, читайте страницу <a href="https://validator.w3.org/docs/why.html">Why Validate?</a>, на сайте W3C.
+    </p>
+    <p>
+        В проверки вашего сайта нет ничего сложного. Просто скопируйте адрес вашей страницы и вставьте в валидатор. Или загрузите файл.
+        Процедура настолько простая, что нет смысла давать дополнительные объяснение. Подробности
+        на странице W3C:
+        <a href="https://jigsaw.w3.org/css-validator/manual.html">Руководство пользователя сервиса проверки CSS</a>.
+    </p>
+    <p class="note">
+        <a href="https://jigsaw.w3.org/css-validator/manual.html">Руководство пользователя сервиса проверки CSS</a>
+        так же применимо и для <a href="https://validator.w3.org/nu/">Nu Html Checker</a> и
+        для <a href="https://validator.w3.org/checklink">Link Checker</a>.
+    </p>
+    <hr class="custom-hr">
+
+    <h3>Значок о том что страница успешно прошла валидацию</h3>
+    <p>
+        Если вы решите разметить на странице значок о том что страница прошла валидацию, то в этом случае консорциум
+        говорит о том что значок следует использовать <i>в качестве ссылки для повторной проверки документа.</i>
+    </p>
+    <figure>
+        <figcaption>Чтобы создать ссылку для валидации веб-страницы, сформируйте URL следующим образом:</figcaption>
+
+        <ul>
+            <li><figure>
+                <figcaption>Создаём ссылку для валидации HTML страницы (Nu Html Checker)</figcaption>
+                <ul>
+                    <li>Используйте базовый URL валидатора <code class="path">https://validator.w3.org/nu/</code> и добавьте параметр <code><b>doc</b></code> с адресом вашей страницы:</li>
+                    <li><code class="path">https://validator.w3.org/nu/?doc=<b>https://your-site.com</b></code></li>
+                </ul>
+            </figure></li>
+            <li><figure>
+                <figcaption>Создаём ссылку для валидации CSS на странице (CSS Validation Service)</figcaption>
+                <ul>
+                    <li>Используйте базовый URL валидатора <code class="path">https://jigsaw.w3.org/css-validator/validator</code> и добавьте параметр <code><b>uri</b></code> с адресом вашей страницы:</li>
+                    <li><code class="path">https://jigsaw.w3.org/css-validator/validator?uri=<b>https://your-site.com</b></code></li>
+                </ul>
+            </figure></li>
+        </ul>
+    </figure>
+    <footer class="footer-note">
+        &copy; 2025 linuxgik.ru
+    </footer>
+</article>
+
+<!-- №2 Подключаем доменное имя к GitHub Pages -->
+<article class="article-box">
+    <header class="article-header">
+        <div>
+            <h2 class="ar-h2">Подключаем доменное имя к GitHub Pages</h2>
+        </div>
+        <span class="type-h2-header type-full"> </span>
+    </header>
+    <!--region Начало -->
+    <p>
+        Пошаговый план подключения домена к сайту на GitHub Page. По инструкции на странице
+        <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">
+            "Managing a custom domain"
+        </a> (рус. "Управление пользовательским доменом"), из <a href="https://docs.github.com/ru/pages">документации
+        по GitHub Pages</a>.
+    </p>
+
+    <ol>
+        <li>
+            Подтверждение домена. Читать страницу докунтации GitHub Page <a href="https://docs.github.com/ru/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages">
+            "Проверка личного домена для GitHub Pages"</a>.
+        </li>
+        <li>
+            Настройка основного(apex)-домена. В инструкции <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain">
+            Configuring an apex domain</a> - документации GitHub Pages, всё это дело подробно расписано по полкам.
+            Гляди туда.
+        </li>
+        <li>
+            Настраиваем поддомен www. <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain-and-the-www-subdomain-variant">
+            Configuring an apex domain and the www subdomain variant
+        </a>(рус. "Настройки основного домена и его поддомена с префиксом «www»")
+        </li>
+        <li>
+            Настраиваем HTTPS. Документации GitHub Pages <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https">
+            Securing your GitHub Pages site with HTTPS
+        </a> (рус. Защита вашего сайта GitHub Pages с помощью HTTPS)
+        </li>
+    </ol>
+    <!--endregion-->
+    <!--region  <h3>Подтверждение домена. Добавляем TXT запись к домену.</h3>-->
+    <h3>Подтверждение домена. Добавляем TXT запись к домену.</h3>
+    <p>В самой первой статье
+        <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages#supported-custom-domains">
+            "Supported custom domains"
+        </a> (рус. "Какие поддерживаются домены"), на странице "About custom domains and GitHub Pages" (рус. "Сведения о личных доменах
+        и страницах") документации GitHub Pages, читаем <i>совет</i> о том что прежде чем настраваить и подключать
+        что-то, сначала нужно подтвердить домен,
+        или если говорить другими словами верифицировать его, привязать к учетной записи GitHub. Это нужно для
+        безопасности, чтобы домен не захватили и не разместили на нем свой сайт. Это не так страшно, но неприятно,
+        и больше может произойти из-за разгильдяйства. Но даже если это и произойдёт, хотя наврятли, то кто то будет хостить свой сайт на вашем домене и
+        всегда можно будет его с этим делом легко обломать, просто изменив у доменного регистратора dns-записи. В общем, если нужны
+        подробности, читай на той же странице статью
+        <a href="https://docs.github.com/ru/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages#securing-the-custom-domain-for-your-github-pages-site">
+            "Securing the custom domain for your GitHub Pages site"
+        </a> (рус. "Защита пользовательского домена для вашего сайта GitHub Pages").
+    </p>
+    <figure>
+        <figcaption>Заходим в <i>Панель управления</i> на сайте у регистратора домена и переходим в "DNS"</figcaption>
+        <img src="/assets/images/web-developers/github-pages/web-dev-gitpages-1-txt-record.png" alt="Иконка перехода в меню DNS">
+    </figure>
+    <p>
+        Нужно добавить новую TXT-запись к домену. Когда вы только приобретаете домен, там уже будет одна запись TXT,
+        её трогать не надо, просто надо добавить ещё одну.
+    </p>
+
+    <!-- Вариант 1 -->
+    <figure>
+        <figcaption>Добавляем TXT-запись.</figcaption>
+        <a href="/assets/images/web-developers/github-pages/web-dev-gitpages-2-txt-record.png" class="image-popup">
+            <img src="/assets/images/web-developers/github-pages/web-dev-gitpages-2-txt-record.png"
+                 alt="Добавление TXT-записи для GitHub Pages"
+                 style="max-width: 200px; height: auto; cursor: zoom-in;">
+        </a>
+    </figure>
+
+
+    <p>
+        То что GitHub дает для копирования в пункте <i>"Create a TXT record in your DNS configuration for the following
+        hostname"</i> - вставляем в <b>NAME</b> новой TXT-записи. То что во втором пункте <i>"Use this code for the value
+        of the TXT record</i> - вставляем в поле <b>DATA</b>. Ну и готово дело. TXT запись для подтверждения домена для учётной записи
+        GitHub добавлена к домену.
+    </p>
+    <h4>Ждем пока обновится конфигурация DNS. Обычно не долго.</h4>
+    <figure>
+        <figcaption>
+            Проверяем обновление DNS:
+        </figcaption>
+        <ul>
+            <li>
+                Linux: <code class="path"><b>dig</b> _github-pages-challenge-USERNAME.example.com +nostats +nocomments +nocmd TXT</code>
+            </li>
+            <li>
+                Windows 11. PowerShell: <code class="path"><b>Resolve-DnsName</b> _github-pages-challenge-USERNAME.example.com TXT</code>
+
+            </li>
+        </ul>
+    </figure>
+    <p>Команда должна показать то, что добавляли в <b>Data</b>. После этой проверки можно нажимать кнопку Verify на GitHub.</p>
+    <!--endregion-->
+
+    <footer class="footer-note">
+        &copy; 2025 linuxgik.ru
+    </footer>
 </article>

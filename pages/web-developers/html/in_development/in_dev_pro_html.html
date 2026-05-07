@@ -1,0 +1,53 @@
+<h2>Какие описания есть в определении элементов в спецификации-HTML</h2>
+<p>
+    В спецификации-HTML, у каждого элементу html в самом начале есть описательная часть. Какие пункты есть
+    в описательной части к html-элементу и что они означают, написано в самой спецификации-HTML, в статье
+    <a href="https://html.spec.whatwg.org/multipage/dom.html#element-definitions">3.2.4 Element definitions</a>
+    (рус.Определения элементов).
+</p>
+
+<div>
+    <h3><span lang="en-US">Categories</span> (рус. Категории)</h3>
+    <p>Список категорий, к которым относится элемент. Они используются при определении моделей содержимого для каждого элемента.</p>
+</div>
+<div>
+
+</div>
+
+A list of categories to which the element belongs. These are used when defining the content models for each element.
+Contexts in which this element can be used
+A non-normative description of where the element can be used. This information is redundant with the content models of elements that allow this one as a child, and is provided only as a convenience.
+For simplicity, only the most specific expectations are listed.
+For example, all phrasing content is flow content. Thus, elements that are phrasing content will only be listed as "where phrasing content is expected", since this is the more-specific expectation. Anywhere that expects flow content also expects phrasing content, and thus also meets this expectation.
+Content model
+A normative description of what content must be included as children and descendants of the element.
+Tag omission in text/html
+A non-normative description of whether, in the text/html syntax, the start and end tags can be omitted. This information is redundant with the normative requirements given in the optional tags section, and is provided in the element definitions only as a convenience.
+Content attributes
+A normative list of attributes that may be specified on the element (except where otherwise disallowed), along with non-normative descriptions of those attributes. (The content to the left of the dash is normative, the content to the right of the dash is not.)
+Accessibility considerations
+For authors: Conformance requirements for use of ARIA role and aria-* attributes are defined in ARIA in HTML. [ARIA] [ARIAHTML]
+For implementers: User agent requirements for implementing accessibility API semantics are defined in HTML Accessibility API Mappings. [HTMLAAM]
+DOM interface
+A normative definition of a DOM interface that such elements must implement.
+This is then followed by a description of what the element represents, along with any additional normative conformance criteria that may apply to authors and implementations. Examples are sometimes also included.
+3.2.4 Определения элементов
+Каждый элемент в этой спецификации имеет определение, включающее следующую информацию:
+Категории
+Список категорий, к которым относится элемент. Они используются при определении моделей содержимого для каждого элемента.
+Контексты, в которых этот элемент может быть использован
+Ненормативное описание того, где можно использовать элемент. Эта информация является избыточной по сравнению с моделями содержимого элементов, которые допускают использование этого элемента в качестве дочернего, и предоставляется только для удобства.
+Для простоты перечислены только самые конкретные ожидания.
+Например, весь текстовый контент является содержимым потока. Таким образом, элементы, которые являются текстовым контентом, будут указаны только как "где ожидается текстовый контент", поскольку это более конкретное ожидание. Везде, где ожидается текстовый контент, также ожидается текстовый контент и, таким образом, также соответствует этому ожиданию.
+Модель контента
+Нормативное описание того, какой контент должен быть включен в качестве дочерних элементов элемента.
+Пропуск тега в тексте/html
+Ненормативное описание того, можно ли в синтаксисе текста/html опускать начальный и конечный теги. Эта информация является избыточной по сравнению с нормативными требованиями, приведенными в разделе "Дополнительные теги", и приводится в определениях элементов только для удобства.
+Атрибуты контента
+Нормативный список атрибутов, которые могут быть указаны в элементе (за исключением случаев, когда запрещено иное), а также ненормативные описания этих атрибутов. (Содержимое слева от тире является нормативным, содержимое справа от тире - нет.)
+Соображения доступности
+Для авторов: Требования к соответствию для использования атрибутов ARIA role и aria-* определены в ARIA в HTML. [ARIA] [ARIAHTML]
+Для разработчиков: Требования к пользовательским агентам для реализации семантики API специальных возможностей определены в HTML Accessibility API Mappings. [HTMLAAM]
+Интерфейс DOM
+Нормативное определение интерфейса DOM, которое должны реализовывать такие элементы.
+Затем следует описание того, что представляет собой элемент, а также любые дополнительные критерии соответствия нормативным требованиям, которые могут применяться к авторам и реализациям. Иногда также приводятся примеры.

@@ -1,5 +1,6 @@
 @import url("fonts/fonts.css");
-@import url("color-var.css");
+@import "variables/color-tail.css";
+@import "variables/color-var.css";
 @import url("typography.css");
 @import url("header-nav.css");
 @import url("code.css");

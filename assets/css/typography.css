@@ -4,10 +4,46 @@
     --color-remote: #7a6733;
     --color-root: #f37f7f;
     /*--color-rsync: rgb(158, 30, 94);*/
-    --color-rsync: rgb(152, 105, 128);
+    --color-rsync: rgb(198 118 155);
     /*--color-attention: rgb(90, 39, 230);*/
-    --color-attention: rgb(126, 114, 152);
+    --color-attention: rgb(108 81 207);
     --color-dir: #268BD2;
+}
+
+/* ВЫДЕЛЕНИЕ В АБЗАЦАХ */
+
+/* Выделение смысловых составляющих из абзаца */
+/* Выделять главное в абзаце, чтобы при беглом взгляде было сразу всё ясно без лишнего прочтения. */
+.rsync {
+    color: var(--color-rsync);
+    font-weight: bold;
+}
+
+/* Внимание. На что нужно обратить особое внимание*/
+.attention {
+    color: var(--color-attention);
+    font-weight: bold;
+}
+/* Директории, файлы, пути к файлам в абзацах */
+/* <span class="path"><span class="dir">_layouts</span>/<span class="html">default.html</span></span> */
+/* Путь к файлу, обрамляется в класс .path, директория в .dir, файл обрамляется в свой класс.*/
+.path {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #edeaea;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+/* Типы файлов в абзацах. Используется вместе с классом .path */
+/* Директория */
+.text-dir {
+    color: var(--color-dir);
+}
+.text-html {
+    color: #E34F26;
+}
+.text-yml {
+    color: oklch(0.575 0.217 24.214);
 }
 
 /* блок код в абзаце */
@@ -34,8 +70,6 @@
 .remote::before {
     content: "remote";
 }
-
-
 .root::before {
     color: var(--color-root);
     content: "root";
@@ -63,16 +97,7 @@
     color: #3ba0e6;
     font-weight: bold;
 }
-/* типы файлов в абзацах */
-.text-dir {
-    color: var(--color-dir);
-}
-.text-html {
-    color: #E34F26;
-}
-.text-yml {
-    color: oklch(0.575 0.217 24.214);
-}
+
 
 
 .custom-hr {
@@ -83,34 +108,14 @@
     margin: 0 auto 0 10em;    /* Автоматические отступы по бокам выравнивают по центру */
 }
 
-/* директории, файлы, пути к файлам */
-/* <span class="path"><span class="dir">_layouts</span>/<span class="html">default.html</span></span> */
-/* Путь к файлу, обрамляется в класс .path, директория в .dir, файл обрамляется в свой класс.*/
-.path {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #edeaea;
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-    font-size: 0.95em;
-}
+
 .note > .path {
     background-color: #edf1dd;
 }
-.yml { color: oklch(0.87 0.16 89.42); }     /* YAML-файл */
 
 
-/* Другое */
 
-/* Очень важное понятие */
-.rsync {
-    color: var(--color-rsync);
-    font-weight: bold;
-}
 
-.attention {
-    color: var(--color-attention);
-    font-weight: bold;
-}
 
 /*kbd {*/
 /*    color: black;*/

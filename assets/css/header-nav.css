@@ -4,39 +4,9 @@
     font-size: 12px;
 }
 
-/* Брендовые название в меню - переход в главное меню */
-    /* Общее к брендовой кнопке <li class="brand-button">  */
-.brand-button {
+.navbar {
     display: flex;
-    font-weight: bold;
-    font-family: open, sans-serif;
-    font-size: 13px;
 }
-.brand-button p {
-    margin: 0;
-    padding: 3px 1em;
-}
-
-
-/*===================*/
-/* Бредовые кнопки  */
-
-.linuxgik::before {
-    content: "Linux";
-    color: #aded16;
-}
-.linuxgik::after {
-    content: "Gik";
-    color: #bbdd0e;
-}
-    /* Веб-разработка */
-.web-dev {
-    color: #1572B6;
-}
-a.web-dev:is(:link, :visited) {
-    color: #1572B6;
-}
-
 /* Первый блок */
 /* .site-nav применяется к тегу ul который внутри nav */
 .site-nav {
@@ -57,6 +27,16 @@ a.web-dev:is(:link, :visited) {
      padding-bottom: 3px;
      padding-right: 1em;
 
+ }
+
+ .site-nav > .brand-button > span {
+     display: block;
+     padding: 3px 1em;
+     background-color: #000000;
+     color: white;
+     text-decoration: none;
+     font-family: "open", sans-serif;
+     font-size: 13px;
  }
 .site-nav > li > a {
     display: block;
@@ -113,9 +93,9 @@ a.web-dev:is(:link, :visited) {
     /*box-shadow: 3px 3px 8px 0 black,*/
     /* -3px -3px 8px 0 white;*/
     border: solid 1px #000000;
-    margin-top: 10px;
+    padding-bottom: 1em;
     margin-right: 10px;
-    border-radius: 1em;
+    border-radius: 0.5em;
 }
 .level-two-header-right > figure > figcaption
 {
@@ -147,5 +127,5 @@ a.web-dev:is(:link, :visited) {
 
 .site-submenu > li > a:hover {
     text-decoration: underline;
-    color: #9ff300;
+    color: #9c1279;
 }

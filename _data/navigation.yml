@@ -3,22 +3,19 @@ sidebar_default: sidebar-L/sidebar-L-default.html
 nav:
 - name: Веб-разработка
   link: /web-dev
-  brand: web-dev
-  h1: Веб-разработка
-  embedding-h1: embedding_h1/wed-devel-header.html
-  subsection:
+  s2:
     - name: CSS
       link: /pages/web-developers/css/css-index.html
-      h1: CSS
-      subsubsection:
+      s3:
         - name: Шрифты
           link: /pages/web-developers/css/fonts.html
-          h1: Шрифты в CSS
+        - name: FlexBox
+          link: /flexbox
     - name: Jekyll
       link: /pages/web-developers/jekyll/jekyll-index.html
-      h1: Jekyll
       sidebar_path: sidebar-L/sidebar_L_webdev_jekky.html
 
+footer:
 - name: Блог
   link: /pages/blog
 
@@ -27,7 +24,7 @@ nav:
   brand: theme-dev
   h1: Руководство по теме LinuxGIk
   sidebar_path: sidebar-L/sidebar-L-default.html
-  subsection:
+  s2:
     - name: Логика навигации
       link: /pages/theme/navigation_logic.html
       h1: Логика навигации на портале

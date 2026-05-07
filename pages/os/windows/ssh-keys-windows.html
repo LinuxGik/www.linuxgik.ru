@@ -1,0 +1,80 @@
+---
+title: ssh-keys-windows
+h1: Использование OpenSSH в Windows 11
+---
+
+<ul>
+    <li>
+        <a href="https://learn.microsoft.com/ru-ru/windows/terminal/tutorials/ssh">
+            Microsoft Learn. "Руководство по SSH в Терминал Windows"
+        </a>
+    </li>
+    <li>
+        <a href="https://learn.microsoft.com/ru-ru/windows-server/administration/openssh/openssh_install_firstuse">
+            Microsoft Learn. "Начало работы с OpenSSH для Windows"
+        </a>
+    </li>
+</ul>
+<p>
+    В Windows 11 присутствует встроенный <i>сервер и клиент SSH</i>, основанный на OpenSSH. По умолчанию клиент OpenSSH
+    уже установлен и находятся в каталоге: C:\Windows\System32\OpenSSH. Также можно это увидеть через "Параметры"
+    (<kbd>Win</kbd> + <kbd>i</kbd>) - "Система" - "Дополнительные компоненты"; и там же в "Дополнительные компоненты"
+    - "Добавление дополнительного компонента", можно установить сервер OpenSSH.
+</p>
+
+<article class="article-box">
+    <header>
+        <h2>Настройки ключей-ssh в системе Windows 11</h2>
+    </header>
+        <p>Ключи-ssh в Windows 11, лежат в каталоге <span class="path">C:\Users\You_user\.ssh\</span> </p>
+        <h3>Если у вас уже есть ключи-ssh</h3>
+            <p>
+                Если у вас уже есть ключи, тогда просто поместите их в каталог <span class="path">C:\Users\You_user\.ssh\</span>. Если каталога нет,
+                просто создайте его обычным образом.
+            </p>
+        <h3>Создаём новый ключ-ssh в Windows 11</h3>
+            <ul>
+                <li>ssh-keygen - для создания  ключей</li>
+                <li>ssh-agent и ssh-add - для защищенного хранения закрытых ключей</li>
+                <li>scp и sftp - для защищенного копирования файлов открытого ключа при первом использовании сервера</li>
+            </ul>
+
+
+
+            <p>Открываем Powershell:</p>
+            <p><code class="text-code-box" >ssh-keygen -t ed25519</code></p>
+            <p>Команда создаст пару-ключей и поместит их в домашней директории: C:\Users\You_user\.ssh\</p>
+            <p>Включаем ssh-agent - для хранения закрытого ключа и добавляем .</p>
+        <pre><code># По умолчанию служба ssh-agent отключена. Настройте ее на автоматический запуск.
+# Убедитесь, что вы работаете как администратор.
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Запустите службу
+Start-Service ssh-agent
+
+# Это должно вернуть статус Running
+Get-Service ssh-agent
+
+# Закрываем терминал администратора и открываем того юзера, ключи которого надо добавить. Т.е. после того как служба
+ssh-agent запущена, любой пользователь на хосте может добавлять туда свои ключи.
+# Теперь загрузите файлы ключей в ssh-agent.
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
+        </code></pre>
+        <p>Закрытый ключ нельзя получить из агента, если использовался надежный алгоритм, например Ed25519.</p>
+        <p>
+            Сразу копируем пару ключей на флешку, и после того как закрытый ключ добавлен в ssh-agent, удаляем его
+            с локального диска. Если вы утратите доступ к закрытому ключу, вам нужно будет создать новую пару ключей
+            и обновить открытый ключ во всех системах, с которыми вы работаете.
+        </p>
+        <p>Если у вас уже есть ключи, тогда просто поместите их в каталог C:\Users\You_user\.ssh\</p>
+        <p>Добавляем открытый ключ на удаленный сервер к которому будем коннектиться по ssh, в файл ~/.ssh/authorized_keys</p>
+        <p><code>chmod 700 ~/.ssh ; chmod 600 ~/.ssh/authorized_keys</code></p>
+</article>
+
+<article class="article-box">
+    <header class="article-header">
+        <h2>Команды управления ключями-ssh, которые уже добавлены в ssh-agent на хосте Windows 11</h2>
+    </header>
+    <p>Просмотреть какие ключи есть в ssh-агенте <code>ssh-add -l</code></p>
+    <p>Удалить все ключи из агента <code>ssh-add –D</code></p>
+</article>

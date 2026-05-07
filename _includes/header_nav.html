@@ -1,35 +1,21 @@
 <!-- Первый блок шапки - главная навигация -->
+<div class="navbar">
+    <img src="/assets/images/brand-logo/Brand-logo.svg" alt="">
 <nav>
     <ul class="site-nav">
         <li class="brand-button">
-            <p>
-                {% if current_subsection %}
-                    <a href="/"><span class="linuxgik"></span></a>
-                    <a href="{{ current_section.link }}" class="{{ current_section.brand }}">{{ current_section.name }}</a>
-                    <span class="{{ current_subsection.brand }}">{{ current_subsection.name }}</span>
-                {% elsif current_section %}
-                    <a href="/"><span class="linuxgik"></span></a>
-                    <span class="{{ current_section.brand }}">{{ current_section.name }}</span>
-                {% else %}
-                    <span class="linuxgik"></span>
-                {% endif %}
-            </p>
+            {% if page.url == "/" %}<span>LinuxGik</span>
+            {% else %}<a href="/">LinuxGik</a>{% endif %}
         </li>
-        {% if current_subsection %}
-            {% for item in current_subsection.subsubsection %}
-        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
-            {% endfor %}
-            {% elsif current_section %}
-                {% for item in current_section.subsection %}
-        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
-                {% endfor %}
-            {% else %}
-                {% for item in site.data.navigation.nav %}
-        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
-                {% endfor %}
-        {% endif %}
+        {% for item in site.data.navigation.nav %}
+            <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+        {% endfor %}
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg></li>
     </ul>
 </nav>
+</div>
 <!-- Конец первого блока шапки (headers) -->
 
 <!-- Второй блок шапки (header)  -->
@@ -49,15 +35,23 @@
 <div class="level-two-header-left">
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-        {% if current_subsection %}
-            <a href="/">Главная</a> &gt;
-            <a href="{{ current_section.link }}">{{ current_section.name }}</a> &gt;
-            <span style="color: #73b101">{{ current_subsection.name }}</span>
-        {% elsif current_section %}
-            <a href="/">Главная</a> &gt;
-            <span style="color: #73b101">{{ current_section.name }}</span>
+        {% if s3 %}
+            <a href="/">Главная</a> /
+            <a href="{{ s1.link }}" > {{ s1.name }} / </a>
+            <a href="{{ s2.link }}"> {{ s2.name }} / </a>
+            <span> {{ s3.name }}</span>
+        {% elsif s2 %}
+            <a href="/">Главная / </a>
+            <a href="{{ s1.link }}"> {{ s1.name }} / </a>
+            <span> {{ s2.name }}</span>
+        {% elsif s1 %}
+            <a href="/">Главная / </a>
+            <span> {{ s1.name }}</span>
         {% else %}
             <span>Вы находитесь на главной странице портала.</span>
         {% endif %}
     </div>
+    <h1>{{ page.h1 }}</h1>
 </div>
+
+{% include header/level_two_header_right.html %}

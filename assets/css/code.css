@@ -1,16 +1,70 @@
-pre {
+/* SONET 4.6 */
+
+/* Блок кода с шапкой */
+.code-block {
     width: 80%;
     max-width: 800px;
-    background: #272822;
-    color: #f8f8f2;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
     margin: 1rem 0;
-    font-family: Roboto;
+    font-family: RobotoMono, monospace;
     font-size: 0.95em;
-    line-height: 1.5;
+    background-color: var(--color-stone-950);
 }
+
+/* Шапка блока - имя файла слева, язык справа */
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: inherit;
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.code-block-filename {
+    color: var(--color-amber-600);
+    font-size: 0.85em;
+}
+
+.code-block-lang {
+    color: #555;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+}
+
+/* Сам код — без скруглений сверху, они на шапке */
+.code-block pre {
+    margin: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    background: var(--color-neutral-950);
+    color: var(--color-gray-300);
+    padding-left: 1rem;
+}
+
+.code-block code {
+    font-family: RobotoMono, monospace;
+}
+
+
+/* МОЙ СТАРЫЙ */
+
+
+/*pre {*/
+/*    width: 80%;*/
+/*    max-width: 800px;*/
+/*    background: #272822;*/
+/*    color: #f8f8f2;*/
+/*    padding: 1rem;*/
+/*    border-radius: 0.5rem;*/
+/*    overflow-x: auto;*/
+/*    margin: 1rem 0;*/
+/*    font-family: Roboto;*/
+/*    font-size: 0.95em;*/
+/*    line-height: 1.5;*/
+/*}*/
+
+
 
 .code {
     font-family: inherit;
@@ -20,8 +74,8 @@ pre {
 }
 
 .dir { color: #268BD2 } /* Директория в коде */
+
 .html { color: #E34F26; }
-.yml { color: oklch(0.391 0.076 86.76); }     /* YAML-файл */
 
 .code > .dir {
     font-weight: bold;

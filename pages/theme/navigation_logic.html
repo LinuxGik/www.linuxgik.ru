@@ -9,20 +9,23 @@ h1: "Логика навигации: LinuxGIk"
         <h2>Как работает меню на портале</h2>
     </header>
     <p>
-        Навигация на портале <strong>LinuxGIk</strong> динамическая и управляется через два основных файла в каталоге <code>_includes/</code> и YAML-данные в <code>_data/navigation.yml</code>.
+        Навигация на портале <strong>LinuxGIk</strong> динамическая и управляется через два основных файла в каталоге
+        <code>_includes/</code> и YAML-данные в <code>_data/navigation.yml</code>.
     </p>
 
     <hr class="custom-hr" />
 
-    <h3>1. Точка входа (Layout)</h3>
+    <h3>1. Точка входа <code class="path">_layouts/default.html</code></h3>
     <p>
         Вся логика начинается в главном шаблоне сайта. Именно здесь подключаются скрипты, отвечающие за расчет разделов и отрисовку меню.
     </p>
 
-    <div style="background-color: #f4f4f4; padding: 15px; border-left: 4px solid royalblue; margin: 20px 0; font-family: 'Roboto Mono', monospace;">
-        <span style="color: royalblue; font-weight: bold;">Файл: _layouts/default.html</span>
-        <pre style="margin-top: 10px; color: #d0c6c6;"><code>{% raw %}&lt;body class="grid-container"&gt;
-
+    <div class="code-block">
+        <div class="code-block-header">
+            <span class="code-block-filename">_layouts/default.html</span>
+            <span class="code-block-lang">HTML· Liquid</span>
+        </div>
+        {% raw %}<pre><code>
     {% include logika_header_sidebar.html %}
 
     &lt;header class="site-header"&gt;
